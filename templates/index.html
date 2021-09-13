@@ -20,11 +20,22 @@
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
 
-    <title>스파르타코딩클럽 | 부트스트랩 연습하기</title>
+    <!-- common.js부분 참조 -->
+    <script src="../static/js/common.js"></script>
+
+    <title>BTS!</title>
 </head>
 
 <body>
-    <h1>이걸로 시작해보죠!</h1>
+    <header w3-include-html = "header" class="head"></header>
+    <div class="menu">
+    </div>
+    <div class="set"><h1>기본틀만 짜봤어요!</h1></div>
+
+    <script>
+        includeHTML();
+    </script>
+    <footer w3-include-html = "footer" class="foot"></footer>
 </body>
 
 </html>
