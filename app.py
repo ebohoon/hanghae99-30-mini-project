@@ -5,10 +5,12 @@ app = Flask(__name__)
 def home():
     return render_template('index.html')
 
+##해더
 @app.route('/header')
 def header():
     return render_template('header.html')
-    
+
+##푸터
 @app.route('/footer')
 def footer():
     return render_template('footer.html')
