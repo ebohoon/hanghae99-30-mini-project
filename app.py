@@ -41,12 +41,12 @@ def albumdata():
 #엘범 정보 크롤링 만들예정인 공간
 def 크롤링():
     doc = {
-        'albumtitle':title,
-        'albumimage':image,
-        'date':desc,
-        'genre':url_receive,
-        'agency':comment_receive,
-        'singlist':singlist
+        'albumtitle':title,             ## 앨범 타이틀
+        'albumimage':image,             ## 앨범 이미지
+        'date':desc,                    ## 앨범 발매일
+        'genre':url_receive,            ## 앨범 장르
+        'agency':comment_receive,       ## 앨범 기획사
+        'singlist':singlist             ## 앨범 곡리스트
     }
 
     db.album.insert_one(doc)
