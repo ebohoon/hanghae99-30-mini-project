@@ -13,20 +13,51 @@ driver.get(url)  # 드라이버에 해당 url의 웹페이지를 띄웁니다.
 sleep(5)  # 페이지가 로딩되는 동안 5초 간 기다립니다. 
 
 driver.execute_script("document.querySelector('#conts > div.section_atist > div > div.atist_dtl_info > div > a').click();")
-sleep(5)
-
+sleep(1)
+driver.execute_script("document.querySelector('#conts > div.wrap_tab_atist.type9 > ul > li:nth-child(4) > a').click();")
+sleep(1)
+driver.execute_script("document.querySelector('#frm > div > ul > li:nth-child(2) > div > a.thumb').click();")
+sleep(1)
 req = driver.page_source  # html 정보를 가져옵니다.
 driver.quit()  # 정보를 가져왔으므로 드라이버는 꺼줍니다.
 
 # soup = BeautifulSoup(data.text, 'html.parser')
 soup = BeautifulSoup(req, 'html.parser')  # 가져온 정보를 beautifulsoup으로 파싱해줍니다.
 
-songs = soup.select("#conts > div.wrap_dtl_atist > div > div.wrap_atist_info > p")
-print(songs)
+songs = soup.select("#conts > div.section_info > div > div.entry")
+print("---------------------------------------")
+
+title = songs[0].select_one("div.info > div.song_name").text.strip()[-3:]
+artist = songs[0].select_one("div.info > div.artist").text.strip()
+date = songs[0].select("div.meta > dl > dd")[0].text
+genre = songs[0].select("div.meta > dl > dd")[1].text
+Publisher = songs[0].select("div.meta > dl > dd")[2].text
+agency = songs[0].select("div.meta > dl > dd")[3].text
+sing = soup.select("#frm > div > table > tbody")
+
+sings = sing[0].find_all("div",{"class": "ellipsis"})
+href = sing[0].find_all("a",{"class": "song_info"})
+# btn button_icons type03 song_info
+# print(sing[0].find_all("div",{"class": "ellipsis"})[1].text)
+    # doc = {
+    #     'albumtitle':title,             ## 앨범 타이틀
+    #     'albumimage':image,             ## 앨범 이미지
+    #     'artist': artist,               ## 가수명
+    #     'date':desc,                    ## 앨범 발매일
+    #     'genre':url_receive,            ## 앨범 장르
+    #     'agency':comment_receive,       ## 앨범 기획사
+    #     'singlist':singlist             ## 앨범 곡리스트
+    # }
 
 
-# for song in songs:
-#     title = song.select_one("td > div > div.wrap_song_info > div.rank01 > span > a").text
-#     artist = song.select_one("td > div > div.wrap_song_info > div.rank02 > span > a").text
-#     likes = song.select_one("td > div > button.like > span.cnt").text
-#     print(title, artist, likes)
+for te in sings[0::2]:
+    title = te.text.strip().replace('\n', '.')
+    
+    # print(title)
+
+
+##정규식으로 바꾸기
+for t1 in href:
+    test = t1["href"]
+
+    print(test)
