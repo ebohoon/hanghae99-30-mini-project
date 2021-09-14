@@ -1,6 +1,19 @@
 from flask import Flask, render_template, jsonify, request
 app = Flask(__name__)
 
+##파이 몽고 DB
+from pymongo import MongoClient
+client = MongoClient('localhost', 27017)
+db = client.LYAlbum
+
+#엘범 리스트 DB
+# db.album.insert_one(doc)
+
+#리뷰 리스트 DB
+# db.review.insert_one(doc)
+
+
+
 @app.route('/')
 def home():
     return render_template('index.html')
@@ -20,5 +33,22 @@ def footer():
 def login():
     return render_template('login.html')
 
+
+@app.route('/albumdata')
+def albumdata():
+    return render_template('albumdata.html')
+
+#엘범 정보 크롤링 만들예정인 공간
+def 크롤링():
+    doc = {
+        'albumtitle':title,
+        'albumimage':image,
+        'date':desc,
+        'genre':url_receive,
+        'agency':comment_receive,
+        'singlist':singlist
+    }
+
+    db.album.insert_one(doc)
 if __name__ == '__main__':
     app.run('0.0.0.0', port=5000, debug=True)
