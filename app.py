@@ -1,4 +1,4 @@
-from flask import Flask, render_template, jsonify, request
+from flask import Flask, render_template, jsonify, request, flash
 app = Flask(__name__)
 
 ##파이 몽고 DB
@@ -12,7 +12,8 @@ db = client.LYAlbum
 #리뷰 리스트 DB
 # db.review.insert_one(doc)
 
-
+app.config['SESSION_TYPE'] = 'filesystem'
+app.secret_key = '이걸보다니.. 대단한걸?'
 
 @app.route('/')
 def home():
@@ -39,7 +40,7 @@ def albumdata():
     return render_template('albumdata.html')
 
 #엘범 정보 크롤링 만들예정인 공간
-@app.route('/temptestdo')
+@app.route('/temptestdo', methods=["GET", "POST"])
 def 크롤링():
     doc = {
         'albumtitle': "타이틀이름!",         ## 앨범 타이틀
@@ -52,5 +53,7 @@ def 크롤링():
     }
 
     db.album.insert_one(doc)
+    flash("더미데이터 입력완료")
+    return render_template('index.html')
 if __name__ == '__main__':
     app.run('0.0.0.0', port=5000, debug=True)
