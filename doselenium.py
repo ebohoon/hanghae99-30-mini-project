@@ -5,7 +5,7 @@ import re
 
 driver = webdriver.Chrome('./chromedriver')  # 드라이버를 실행합니다.
 
-url = "https://www.melon.com/search/total/index.htm?q=%EB%A6%AC%EC%8C%8D"
+url = "https://www.melon.com/search/total/index.htm?q=bts&section=&mwkLogType=T"
 # headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36'}
 # data = requests.get(url, headers=headers)
 
@@ -15,7 +15,8 @@ sleep(5)  # 페이지가 로딩되는 동안 5초 간 기다립니다.
 driver.execute_script(
     "document.querySelector('#conts > div.section_atist > div > div.atist_dtl_info > div > a').click();")
 sleep(1)
-driver.execute_script("document.querySelector('#conts > div.wrap_tab_atist.type9 > ul > li:nth-child(4) > a').click();")
+driver.execute_script("document.querySelector('#conts > div.wrap_tab_atist > ul > li:nth-child(4) > a').click();")
+#conts > div.wrap_tab_atist > ul > li:nth-child(4) > a
 sleep(1)
 req = driver.page_source
 soup = BeautifulSoup(req, 'html.parser')
@@ -85,3 +86,4 @@ while True:
         driver.execute_script("document.querySelector('#pageObjNavgation > div > span > a').click();")
     except:
         break
+driver.quit()
