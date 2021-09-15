@@ -102,16 +102,10 @@
             }
         })
     }
-    $("#test1").click(function(){ 	
-
-        var str = ""
-        var tdArr = new Array();	// 배열 선언
-        
-        // 현재 클릭된 Row(<tr>)
-        var tr = $(this);
-        var td = tr.children();
-        console.log("클릭됬네")
-    });
+    function test(test){ 	
+        var a = test.data
+        console.log(a)
+    }
 
 </script>
 <style>
@@ -197,14 +191,14 @@
             </tr>
         </thead>
         <tbody id = "reviewbody">
-            <tr>
+            <tr href="javascript:void(0);" onclick="test(this);">
                 <th>
                     서른마흔다섯번
                 </th>
                 <th>
                     도도
                 </th>
-                <th>
+                <th test = "127.01.0144">
                     으어 이페이지는 안되 돌아가 봐줄마음 없어
                 </th>
             </tr>
