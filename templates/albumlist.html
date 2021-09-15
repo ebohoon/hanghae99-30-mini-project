@@ -67,7 +67,7 @@
         }
 
         $(document).ready(function () {
-            
+            listing()
         })
         function listing() {
             $.ajax({
@@ -82,24 +82,22 @@
                         let genre = album[i]['genre']
                         let date = album[i]['date']
                         let albumimage = album[i]['albumimage']
-                        
-                        let temp_html = `
-                        <div class="col-md-1">
-                            <div class="card" style="width: 18rem;">
-                                <img class="card-img-top"
-                                     src="https://image.genie.co.kr/Y/IMAGE/IMG_ALBUM/081/545/399/81545399_1600401677905_1_600x600.JPG/dims/resize/Q_80,0"
-                                     alt="Card image cap">
-                                <div class="card-body">
-                                    <p class="card-title">Dynamite</p>
-                                    <div class="date">[싱글]</div>
-                                    <p class="date">2020.08.21</p>
-                                    <button onclick="showReview()" type="button" class="btn btn-primary">리뷰보기</button>
-                                    <button onclick="makeReview()" type="button" class="btn btn-primary">리뷰쓰기</button>
-                                </div>
-                            </div>
-                        </div>
-                        `
-                                    
+
+                        let temp_html = `<div class="col-md-1">
+                                            <div class="card" style="width: 18rem;">
+                                                <img class="card-img-top"
+                                                     src="${albumimage}"
+                                                     alt="Card image cap">
+                                                <div class="card-body">
+                                                    <p class="card-title">${albumtitle}</p>
+                                                    <div class="date">[${genre}]</div>
+                                                    <p class="date">${date}</p>
+                                                    <button onclick="showReview()" type="button" class="btn btn-primary">리뷰보기</button>
+                                                    <button onclick="makeReview()" type="button" class="btn btn-primary">리뷰쓰기</button>
+                                                </div>
+                                            </div>
+                                        </div>`
+
                         $('#test').append(temp_html)
                     }
                 }

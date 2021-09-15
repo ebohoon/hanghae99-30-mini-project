@@ -46,7 +46,7 @@ def albumlist():
 @app.route('/listing', methods=['GET'])
 def listing():
     album = list(db.album.find({},{'_id':False}))
-    return jsonify({'album':album})
+    return jsonify({'album': album})
 
 #엘범 정보 크롤링 만들예정인 공간
 @app.route('/temptestdo', methods=["GET", "POST"])
