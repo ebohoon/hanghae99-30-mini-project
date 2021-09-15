@@ -42,6 +42,9 @@ def albumdata():
 #엘범 정보 크롤링 만들예정인 공간
 @app.route('/temptestdo', methods=["GET", "POST"])
 def 크롤링():
+    
+    testlist = [("test","testdo"),("test2","testdo2")]
+
     doc = {
         'albumtitle': "타이틀이름!",         ## 앨범 타이틀
         'albumimage': "이미지 이름",         ## 앨범 이미지
@@ -49,7 +52,7 @@ def 크롤링():
         'date': "2021.09.15",               ## 앨범 발매일
         'genre': "장르",                    ## 앨범 장르
         'agency': "기획사",                 ## 앨범 기획사
-        'singlist': "곡리스트"              ## 앨범 곡리스트
+        'singlist': testlist              ## 앨범 곡리스트
     }
 
     db.album.insert_one(doc)
