@@ -39,6 +39,15 @@ def login():
 def albumdata():
     return render_template('albumdata.html')
 
+@app.route('/albumlist')
+def albumlist():
+    return render_template('albumlist.html')
+
+@app.route('/listing', methods=['GET'])
+def listing():
+    album = list(db.album.find({},{'_id':False}))
+    return jsonify({'album':album})
+
 #엘범 정보 크롤링 만들예정인 공간
 @app.route('/temptestdo', methods=["GET", "POST"])
 def 크롤링():
@@ -53,6 +62,8 @@ def 크롤링():
     }
 
     db.album.insert_one(doc)
+    flash("더미데이터 입력완료")
+    return render_template('index.html')
 
 @app.route('/review', methods=['GET'])
 def show_review():
@@ -64,7 +75,7 @@ def show_review():
 def make_review():
     return jsonify({'msg': 'POST 요청 완료!'})
 
-    flash("더미데이터 입력완료")
-    return render_template('index.html')
+
+
 if __name__ == '__main__':
     app.run('0.0.0.0', port=5000, debug=True)

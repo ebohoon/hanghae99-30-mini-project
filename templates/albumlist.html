@@ -35,6 +35,9 @@
             color: gray;
             font-size: 12px;
         }
+        .card {
+            display: inline-block;
+        }
     </style>
 
     <script>
@@ -59,6 +62,39 @@
                 }
             })
         }
+
+        $(document).ready(function () {
+            listing()
+        })
+        function listing() {
+            $.ajax({
+                type: "GET",
+                url: "/listing",
+                data: {},
+                success: function (response) {
+                    let album = response['album']
+                    for (let i = 0; i < album.length; i++) {
+                        let albumtitle = album[i]['albumtitle']
+                        let genre = album[i]['genre']
+                        let date = album[i]['date']
+                        let albumimage = album[i]['albumimage']
+
+                        let temp_html = `<img class="card-img-top"
+                                                 src="${albumimage}"
+                                                 alt="Card image cap">
+                                            <div class="card-body">
+                                                <p class="card-title">${albumtitle}</p>
+                                                <div class="date">[${genre}]</div>
+                                                <p class="date">${date}</p>
+                                                <button onclick="showReview()" type="button" class="btn btn-primary">리뷰보기</button>
+                                                <button onclick="makeReview()" type="button" class="btn btn-primary">리뷰쓰기</button>
+                                            </div>`
+
+                        $('#cards-box').append(temp_html)
+                    }
+                }
+            });
+        }
     </script>
 
 </head>
@@ -68,9 +104,6 @@
 <header w3-include-html="header" class="head">
 
 </header>
-
-<div class="menu">
-</div>
 
 <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
     <ol class="carousel-indicators">
@@ -85,33 +118,15 @@
                     <!--여기가 한그리드-->
                     <div class="col-sm-6 d-flex justify-content-center">
                         <!--여기서 부터 카드-->
-                        <div class="card" style="width: 18rem;">
-                            <img class="card-img-top"
-                                 src="https://image.genie.co.kr/Y/IMAGE/IMG_ALBUM/082/055/361/82055361_1621563082144_1_600x600.JPG/dims/resize/Q_80,0"
-                                 alt="Card image cap">
-                            <div class="card-body">
-                                <p class="card-title">Butter</p>
-                                <div class="date">[싱글]</div>
-                                <p class="date">2021.05.21</p>
-                                <button onclick="showReview()" type="button" class="btn btn-primary">리뷰보기</button>
-                                <button onclick="makeReview()" type="button" class="btn btn-primary">리뷰쓰기</button>
-                            </div>
+                        <div id="cards-box" class="card" style="width: 18rem;">
+
                         </div>
                         <!--카드 끝-->
                     </div>
                     <!--여기가 한그리드-->
                     <div class="col-sm-6 d-flex justify-content-center">
                         <div class="card" style="width: 18rem;">
-                            <img class="card-img-top"
-                                 src="https://image.genie.co.kr/Y/IMAGE/IMG_ALBUM/082/131/679/82131679_1625795131913_1_600x600.JPG/dims/resize/Q_80,0"
-                                 alt="Card image cap">
-                            <div class="card-body">
-                                <p class="card-title">Butter / Permission to Dance</p>
-                                <div class="date">[싱글]</div>
-                                <p class="date">2021.07.09</p>
-                                <button onclick="showReview()" type="button" class="btn btn-primary">리뷰보기</button>
-                                <button onclick="makeReview()" type="button" class="btn btn-primary">리뷰쓰기</button>
-                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -153,6 +168,7 @@
                             </div>
                         </div>
                     </div>
+
                 </div>
             </div>
 
