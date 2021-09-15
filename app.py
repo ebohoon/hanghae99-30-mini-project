@@ -66,12 +66,13 @@ def 크롤링():
     testlist = [("test","testdo"),("test2","testdo2")]
 
     doc = {
-        'albumtitle': "작은노래의 시",         ## 앨범 타이틀
+        'albumtitle': "Butter",         ## 앨범 타이틀
         'albumimage': "http://sdfsdj",         ## 앨범 이미지
         'artist': "방탄",                ## 가수명
         'date': "2021.09.15",               ## 앨범 발매일
         'genre': "랩",                    ## 앨범 장르
         'agency': "카카오",                 ## 앨범 기획사
+        'publisher': "어딜까",              ## 앨범 발매사
         'singlist': testlist              ## 앨범 곡리스트
     }
 

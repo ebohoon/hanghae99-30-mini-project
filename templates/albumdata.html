@@ -19,7 +19,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
-    
+
 
 
     <!-- common.js부분 참조 -->
@@ -29,26 +29,36 @@
     <title>BTS!</title>
 </head>
 <script>
-    
+
     function listing(test) {
         console.log(test)
+        
         $.ajax({
             type: "POST",
             url: "/albumdata/find",
-            data: {sample_give: test},
-            success: function(response){
-               test = response['msg']
-               console.log(test[0])
-               $("#titlename").html(`<h1>${test[0]["albumtitle"]}</h1>`)
-               $("#date").html(`${test[0]["date"]}`)
-               $("#genre").html(`${test[0]["genre"]}`)
-               $("#agency").html(`${test[0]["agency"]}`)
-               $("#date").html(`${test[0]["date"]}`)
-               $("#date").html(`${test[0]["date"]}`)
-             
+            data: { sample_give: test },
+            success: function (response) {
+                test = response['msg']
+                console.log(test[0]["singlist"].length)
+                $("#titlename").html(`<h1>${test[0]["albumtitle"]}</h1>`)
+                $("#date").html(`${test[0]["date"]}`)
+                $("#genre").html(`${test[0]["genre"]}`)
+                $("#publisher").html(`${test[0]["publisher"]}`)
+                $("#agency").html(`${test[0]["agency"]}`)
+                $("#singtolist").empty()
+                for(let i = 0 ; i < test[0]["singlist"].length ; i++){
+                    $("#singtolist").append(`
+                    <tr>
+                        <th>
+                            <a href="${test[0]["singlist"][i][0]}">${test[0]["singlist"][i][1]}</a>
+                        </th>
+                    </tr>
+                    `)
+                }
+                
 
             }
-          })
+        })
     }
 
 </script>
@@ -59,35 +69,37 @@
     {%if msg%}
     <script>
         var mapping = "{{ data }}";
-        
+
         console.log(mapping)
         listing(mapping);
     </script>
     {%endif%}
     <div class="row">
         <div class="col">
-        <img class="testimg"
-     src="https://cdnimg.melon.co.kr/cm/album/images/102/73/641/10273641_500.jpg?931a1f4b6e6c90752585d656e86f0842/melon/resize/282/quality/80/optimize"
-     alt="여기에 이미지 있어요!!">
+            <img class="testimg"
+                src="https://cdnimg.melon.co.kr/cm/album/images/102/73/641/10273641_500.jpg?931a1f4b6e6c90752585d656e86f0842/melon/resize/282/quality/80/optimize"
+                alt="여기에 이미지 있어요!!">
         </div>
         <div class="col">
-            <div id = "titlename"><h1>여기에 오면 망한징조인데</h1></div>
-            <div id = "abdata">
+            <div id="titlename">
+                <h1>여기에 오면 망한징조인데</h1>
+            </div>
+            <div id="abdata">
                 <div class="container">
                     <div class="row">
-                      <div class="col">발매일</div>
-                      <div class="col" id = "date">2021.07.23</div>
-                      <div class="w-100"></div>
-                      <div class="col">장르</div>
-                      <div class="col" id = "genre">댄스,R&B/Soul</div>
-                      <div class="w-100"></div>
-                      <div class="col" id = "agency" >발매사</div>
-                      <div class="col">YG PLUS</div>
-                      <div class="w-100"></div>
-                      <div class="col">기획사</div>
-                      <div class="col" id = "date">BLGHIT MUSIC</div>
+                        <div class="col">발매일</div>
+                        <div class="col" id="date">2021.07.23</div>
+                        <div class="w-100"></div>
+                        <div class="col">장르</div>
+                        <div class="col" id="genre">댄스,R&B/Soul</div>
+                        <div class="w-100"></div>
+                        <div class="col">발매사</div>
+                        <div class="col" id="publisher">YG PLUS</div>
+                        <div class="w-100"></div>
+                        <div class="col">기획사</div>
+                        <div class="col" id="agency">BLGHIT MUSIC</div>
                     </div>
-                  </div>
+                </div>
             </div>
             <table class="table table-condensed">
                 <thead>
@@ -97,7 +109,7 @@
                         </th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody id = "singtolist">
                     <tr>
                         <th>
                             <a href="https://www.melon.com/song/detail.htm?songId=31737197">작은것들을 위한시</a>
