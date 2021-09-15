@@ -67,7 +67,7 @@
         }
 
         $(document).ready(function () {
-            
+            listing()
         })
         function listing() {
             $.ajax({
@@ -77,11 +77,25 @@
                 success: function (response) {
                     let album = response['album']
                     $('#test').empty()
-                    for (let i = 0; i < 3; i++) {
+                    for (let i = 0; i < album.lenth ; i++) {
                         let albumtitle = album[i]['albumtitle']
                         let genre = album[i]['genre']
                         let date = album[i]['date']
                         let albumimage = album[i]['albumimage']
+                        
+                        if((i % 2) == 0 || i == album.lenth){
+                            let temp_html1=`
+                            <div class="carousel-item active">
+                                <div class="container-fluid">
+                                    <!-- 그리드 박스-->
+                                    <div class="row" id = "test">
+                                        ${temp_html}
+                                    </div>
+                                </div>
+                            </div>
+                            `
+                            $(dododo).append(temp_html)
+                        }
                         
                         let temp_html = `
                         <div class="col-md-1">
@@ -99,8 +113,8 @@
                             </div>
                         </div>
                         `
-                                    
-                        $('#test').append(temp_html)
+                                
+                        
                     }
                 }
             });
@@ -121,10 +135,13 @@
         <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
         <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
     </ol>
-    <div class="carousel-inner">
-        <div class="carousel-item active">
+    <!-- 제일큰 박스-->
+    <div class="carousel-inner" id = "dododo">
+        <!-- 한 페이지 박스-->
+        <div class="carousel-item active" >
             <div class="container-fluid">
                 <div class="row" id = "test">
+                    <!-- 카드-->
                     <div class="col-md-1">
                         <div class="card" style="width: 18rem;">
                             <img class="card-img-top"
@@ -171,7 +188,6 @@
                 </div>
             </div>
         </div>
-
         <div class="carousel-item">
             <div class="container-fluid">
                 <div class="row">
@@ -267,7 +283,7 @@
 
 
 <!-- 푸터 시작부분 -->
-<!--    <footer w3-include-html = "footer" class="foot"></footer>-->
+<!-- <footer w3-include-html = "footer" class="foot"></footer>-->
 </body>
 <!-- 해더와 푸터를 불러옴 -->
 <script>
