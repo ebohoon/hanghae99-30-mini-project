@@ -66,6 +66,15 @@ def find_reviewlist():
     return jsonify({'msg':albumliset})
 
 
+@app.route('/albumlist')
+def albumlist():
+    return render_template('albumlist.html')
+
+@app.route('/listing', methods=['GET'])
+def listing():
+    album = list(db.album.find({},{'_id':False}))
+    return jsonify({'album': album})
+
 #엘범 정보 크롤링 만들예정인 공간
 @app.route('/temptestdo', methods=["GET", "POST"])
 def 크롤링():
@@ -84,6 +93,19 @@ def 크롤링():
     }
 
     db.album.insert_one(doc)
+    flash("더미데이터 입력완료")
+    return render_template('index.html')
+
+@app.route('/review', methods=['GET'])
+def show_review():
+    sample_receive = request.args.get('sample_give')
+    print(sample_receive)
+    return jsonify({'msg': 'GET 연결 완료!'})
+
+@app.route('/review', methods=['POST'])
+def make_review():
+    return jsonify({'msg': 'POST 요청 완료!'})
+
     flash("더미데이터 입력완료")
     return render_template('index.html')
 
