@@ -19,6 +19,8 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
+    
+
 
     <!-- common.js부분 참조 -->
     <script src="../static/js/common.js"></script>
@@ -27,109 +29,26 @@
     <title>BTS!</title>
 </head>
 <script>
-    function showOrderList() {
-        let phone = $('#phone1').val() + '-' + $('#phone2').val() + '-' + $('#phone3').val()
-
-        let temp_html = ``;
-        let temp_html2 = ``;
+    
+    function listing(test) {
+        console.log(test)
         $.ajax({
             type: "POST",
-            url: "/orderlist/find",
-            data: { 'phone': phone },
-            success: function (response) {
-                $("#orderListDiv").html("")
-                const data1 = response['orderlist']
-                let data = JSON.parse(data1)
-                //console.log(data)
-                for (let i = 0; i < data.length; i++) {
-                    let data_name = data[i]['name']
-                    let data_addr = data[i]['address']
-                    let data_phone = data[i]['phone']
-                    let data_listorder = data[i]['menu']
-                    let data_priceall = data[i]['price']
-                    let data_state = data[i]['state']
-                    let data_today = data[i]['today']
-                    let data_postmsg = data[i]['postmsg']
-                    let data_deliverynum = data[i]['deliverynum']
-                    let data_deliverycompany = data[i]['deliverycompany']
-                    let data_id = data[i]['_id']['$oid']
-                    let showlivery = showdelivery(data_deliverynum, data_deliverycompany)
-                    //console.log(data_deliverynum)
-                    let delivery_check = ``
-                    let delivery_state = ``
-                    if(data_deliverynum !== '입력해주세요~'){
-                        delivery_check  = `<a href="https://tracker.delivery/#/${data_deliverycompany}/${data_deliverynum}" target="_blank">배송조회(자세히)</a>`
-                        delivery_state = `${showlivery}`
-                    }else{
-                        delivery_check =``
-                        delivery_state = ``
-                    }
-                    for (let a = 0; a < data_listorder.length; a++) {
-                        temp_html2 += `
-                                    <div class="deli_banchan">
-                                        <h1>${data_listorder[a].split(',')[0]}  </h1>
-                                        <span>주문수량 : ${data_listorder[a].split(',')[2]} 개</span>
-                                    </div>
-                                </div>
-                                <ul class="title">
-                                    <li class="title_p">
-                                        주문가격
-                                    </li>
-                                    <li>
-                                        <span>
-                                            <span>${data_listorder[a].split(',')[1]}</span>
-                                            원</span>
-                                    </li>
-                                </ul>
-                                    `
-                    }
+            url: "/albumdata/find",
+            data: {sample_give: test},
+            success: function(response){
+               test = response['msg']
+               console.log(test[0])
+               $("#titlename").html(`<h1>${test[0]["albumtitle"]}</h1>`)
+               $("#date").html(`${test[0]["date"]}`)
+               $("#genre").html(`${test[0]["genre"]}`)
+               $("#agency").html(`${test[0]["agency"]}`)
+               $("#date").html(`${test[0]["date"]}`)
+               $("#date").html(`${test[0]["date"]}`)
+             
 
-                    temp_html = `
-                    <div class="order_ListInner">
-        <div class="deli_adress">
-            <div>
-                <span style="margin-left: 4px;">배송 정보</span>${delivery_check}
-                
-            </div>
-           <div>
-               <li>${data_name} <a href="javascript:void(0);" onclick="deleorder(this);" attr-a="${data_id}"><img src="../static/img/cross-sign.png" style="width: 15x; height: 15px; margin-bottom: 3px;"/></a></li>
-               <li style="color:gray">${data_phone}</li>
-               <li>${data_addr}</li>
-               <li>${delivery_state}</li>
-           </div>
-        </div>
-        ${temp_html2}
-    <div>
-        <div class="to_price">
-            <li>
-                총 결제금액 (배송비 4000원 포함)
-            </li>
-            <li>
-                <span><span style="color:darkblue">${data_priceall}</span>원</span>
-            </li>
-        </div>
-        <li>
-            주문상태 : <span>${data_state}</span>
-        </li>
-        <li id = test>
-            
-        </li>
-    </div>
-                        `;
-                    temp_html2 = ``;
-                    $("#orderListDiv").append(temp_html)
-
-                }
-                if(data.length == 0){
-                    temp_html = `<div class="deli_adress">
-                                    <div>
-                                        <span style="margin-left: 4px;">주문 목록이 없네요 오홓홓</span>
-                                    </div>
-                                </div>`
-                    $("#orderListDiv").html(temp_html)
-                }
             }
-        })
+          })
     }
 
 </script>
@@ -137,7 +56,14 @@
 <body>
     <!-- 해더 시작부분 -->
     <header w3-include-html="header" class="head"></header>
-
+    {%if msg%}
+    <script>
+        var mapping = "{{ data }}";
+        
+        console.log(mapping)
+        listing(mapping);
+    </script>
+    {%endif%}
     <div class="row">
         <div class="col">
         <img class="testimg"
@@ -145,21 +71,21 @@
      alt="여기에 이미지 있어요!!">
         </div>
         <div class="col">
-            <div id = "titlename"><h1>Permission to Dance</h1></div>
+            <div id = "titlename"><h1>여기에 오면 망한징조인데</h1></div>
             <div id = "abdata">
                 <div class="container">
                     <div class="row">
                       <div class="col">발매일</div>
-                      <div class="col">2021.07.23</div>
+                      <div class="col" id = "date">2021.07.23</div>
                       <div class="w-100"></div>
                       <div class="col">장르</div>
-                      <div class="col">댄스,R&B/Soul</div>
+                      <div class="col" id = "genre">댄스,R&B/Soul</div>
                       <div class="w-100"></div>
-                      <div class="col">발매사</div>
+                      <div class="col" id = "agency" >발매사</div>
                       <div class="col">YG PLUS</div>
                       <div class="w-100"></div>
                       <div class="col">기획사</div>
-                      <div class="col">BLGHIT MUSIC</div>
+                      <div class="col" id = "date">BLGHIT MUSIC</div>
                     </div>
                   </div>
             </div>

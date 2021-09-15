@@ -3,6 +3,7 @@ app = Flask(__name__)
 
 #테스트 improt
 from bson.json_util import dumps
+import json
 
 ##파이 몽고 DB
 from pymongo import MongoClient
@@ -38,29 +39,25 @@ def login():
     return render_template('login.html')
 
 
-@app.route('/albumdata')
+@app.route('/albumdata', methods=['GET'])
 def albumdata():
-    return render_template('albumdata.html')
+    sample_receive = request.args.get('sample_give')
+    if sample_receive is None:
+        return render_template('albumdata.html')
+    else:
+        sample_receive = request.args.get('sample_give')
+        print(sample_receive)
+        data = sample_receive
+        return render_template('albumdata.html', msg = "일단 연결은 되네", data = data)
+    
 
-@app.route('/orderlist/find', methods=['POST'])
+@app.route('/albumdata/find', methods=['POST'])
 def find_orderlist():
-    ##로그인 확인
-    id = session.get('logged_in')
-    ##로그인이 안되어있으면.. 아직 쓸모없음 
-    # if id is not None:
-    #     test = list(db.users.find({'userid':id}))[0]['orderlisttest']
-        
-    #     test1 = []
-    #     for a in test:
-    #         test1.append(list(db.order.find({'_id':ObjectId(a)}))[0])
-    #     #print(test1)
-    #     return jsonify({'orderlist':dumps(test1), 'msg':'조회완료!'})
-    
-    phone = request.form['phone']
-    orderlist = list(db.album.find({'phone':phone}))
-    return jsonify({'orderlist':dumps(orderlist), 'msg':'조회완료!'})
-    
-    
+    titlere = request.form['sample_give']
+    albumliset = list(db.album.find({"albumtitle": titlere},{'_id':False}))
+    print(albumliset)
+    return jsonify({'msg':albumliset})
+
 
 #엘범 정보 크롤링 만들예정인 공간
 @app.route('/temptestdo', methods=["GET", "POST"])
@@ -69,12 +66,12 @@ def 크롤링():
     testlist = [("test","testdo"),("test2","testdo2")]
 
     doc = {
-        'albumtitle': "타이틀이름!",         ## 앨범 타이틀
-        'albumimage': "이미지 이름",         ## 앨범 이미지
-        'artist': "가수이름",                ## 가수명
+        'albumtitle': "작은노래의 시",         ## 앨범 타이틀
+        'albumimage': "http://sdfsdj",         ## 앨범 이미지
+        'artist': "방탄",                ## 가수명
         'date': "2021.09.15",               ## 앨범 발매일
-        'genre': "장르",                    ## 앨범 장르
-        'agency': "기획사",                 ## 앨범 기획사
+        'genre': "랩",                    ## 앨범 장르
+        'agency': "카카오",                 ## 앨범 기획사
         'singlist': testlist              ## 앨범 곡리스트
     }
 
