@@ -55,15 +55,24 @@ def albumdata():
 def find_alumdatalist():
     titlere = request.form['sample_give']
     albumliset = list(db.album.find({"albumtitle": titlere},{'_id':False}))
-    print(albumliset)
+    
     return jsonify({'msg':albumliset})
 
 @app.route('/albumdata/reviewfind', methods=['POST'])
 def find_reviewlist():
     titlere = request.form['sample_give']
     albumliset = list(db.review.find({"albumtitle": titlere},{'_id':False}))
+    
+    return jsonify({'msg':albumliset})
+
+
+@app.route('/albumdata/onereview', methods=['POST'])
+def find_reviewone():
+    titlere = request.form['sample_give']
+    albumliset = list(db.review.find({"albumtitle": titlere, "date": "2021.09.11"},{'_id':False}))
     print(albumliset)
     return jsonify({'msg':albumliset})
+
 
 
 #엘범 정보 크롤링 만들예정인 공간
@@ -97,7 +106,7 @@ def 리뷰더미데이터():
         'review': "BTS최고다!",                 #한줄평
         'nickname': "도도",                     #닉네임
         'rete': "3",                            #별점
-        'date': "2021.09.15",                   #리뷰 날짜
+        'date': "2021.09.11",                   #리뷰 날짜
         'morereview': "랩",                     #리뷰
         'albumtitle': "Butter"                  #해당 엘범타이틀
     }

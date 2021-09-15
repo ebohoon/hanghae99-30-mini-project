@@ -71,9 +71,6 @@
                 
                 $("#reviewbody").empty();
                 for(let i = 0 ; i < test.length ; i++){
-                    console.log(test[i]["nickname"])
-                    console.log(test[i]["review"])
-                    console.log(test[i]["date"])
                     
                     $("#reviewbody").append(`
                     <tr>
@@ -93,6 +90,28 @@
             }
         })
     }
+    function reviewone(test) {
+        
+        $.ajax({
+            type: "POST",
+            url: "/albumdata/onereview",
+            data: { sample_give: test },
+            success: function (response) {
+                test = response['msg']
+                console.log(test)
+            }
+        })
+    }
+    $("#test1").click(function(){ 	
+
+        var str = ""
+        var tdArr = new Array();	// 배열 선언
+        
+        // 현재 클릭된 Row(<tr>)
+        var tr = $(this);
+        var td = tr.children();
+        console.log("클릭됬네")
+    });
 
 </script>
 <style>
@@ -113,6 +132,7 @@
         
         listing(mapping);
         reviewlisting(mapping);
+        reviewone(mapping);
     </script>
     {%endif%}
     <div class="row">
@@ -162,10 +182,10 @@
     </div>
 
 
-    <table class="table table-hover">
+    <table class="table table-hover" id = "test1">
         <thead>
             <tr>
-                <th>
+                <td>
                     번호
                 </th>
                 <th>
