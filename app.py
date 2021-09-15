@@ -52,9 +52,16 @@ def albumdata():
     
 
 @app.route('/albumdata/find', methods=['POST'])
-def find_orderlist():
+def find_alumdatalist():
     titlere = request.form['sample_give']
     albumliset = list(db.album.find({"albumtitle": titlere},{'_id':False}))
+    print(albumliset)
+    return jsonify({'msg':albumliset})
+
+@app.route('/albumdata/reviewfind', methods=['POST'])
+def find_reviewlist():
+    titlere = request.form['sample_give']
+    albumliset = list(db.review.find({"albumtitle": titlere},{'_id':False}))
     print(albumliset)
     return jsonify({'msg':albumliset})
 
@@ -79,5 +86,26 @@ def 크롤링():
     db.album.insert_one(doc)
     flash("더미데이터 입력완료")
     return render_template('index.html')
+
+
+## 리뷰 더미데이터 생성
+@app.route('/temptestdo11', methods=["GET", "POST"])
+def 리뷰더미데이터():
+    
+
+    doc = {
+        'review': "BTS최고다!",                 #한줄평
+        'nickname': "도도",                     #닉네임
+        'rete': "3",                            #별점
+        'date': "2021.09.15",                   #리뷰 날짜
+        'morereview': "랩",                     #리뷰
+        'albumtitle': "Butter"                  #해당 엘범타이틀
+    }
+
+    db.review.insert_one(doc)
+    flash("더미데이터 입력완료")
+    return render_template('index.html')
+
+
 if __name__ == '__main__':
     app.run('0.0.0.0', port=5000, debug=True)
