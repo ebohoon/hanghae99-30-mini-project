@@ -13,6 +13,7 @@ db = client.LYAlbum
 # db.review.insert_one(doc)
 
 
+
 @app.route('/')
 def home():
     return render_template('index.html')
@@ -37,20 +38,17 @@ def login():
 def albumdata():
     return render_template('albumdata.html')
 
-@app.route('/albumlist')
-def albumlist():
-    return render_template('albumlist.html')
-
 #엘범 정보 크롤링 만들예정인 공간
+@app.route('/temptestdo')
 def 크롤링():
     doc = {
-        'albumtitle':title,             ## 앨범 타이틀
-        'albumimage':image,             ## 앨범 이미지
-        'artist': artist,               ## 가수명
-        'date':desc,                    ## 앨범 발매일
-        'genre':url_receive,            ## 앨범 장르
-        'agency':comment_receive,       ## 앨범 기획사
-        'singlist':singlist             ## 앨범 곡리스트
+        'albumtitle': "타이틀이름!",         ## 앨범 타이틀
+        'albumimage': "이미지 이름",         ## 앨범 이미지
+        'artist': "가수이름",                ## 가수명
+        'date': "2021.09.15",               ## 앨범 발매일
+        'genre': "장르",                    ## 앨범 장르
+        'agency': "기획사",                 ## 앨범 기획사
+        'singlist': "곡리스트"              ## 앨범 곡리스트
     }
 
     db.album.insert_one(doc)
