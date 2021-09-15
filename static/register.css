@@ -17,7 +17,7 @@ body {
 
     background-position: center;
     background-size: cover;
-    background-color:#D4B0D9;
+
     min-height: 100vh;
 }
 
@@ -28,6 +28,7 @@ body {
 .wrap {
     width: 800px;
     margin: auto;
+
 
 
 }
@@ -47,6 +48,7 @@ body {
     border-radius: 20px;
     padding: 2.5em;
     margin-bottom:20px;
+    background-color:#D4B0D9;
 
 }
 
@@ -61,8 +63,22 @@ body {
 
 }
 
-/*#colFormLabel {*/
-/*    width: 500px;*/
-/*}*/
+.display-4 {
+
+            font-weight: bold;
+            color: aliceblue;
+            text-align: center;
+            margin: auto;
+        }
+
+        .lead {
+            color: aliceblue;
+            text-align: center;
+        }
+#colFormLabel{
+    width:700px;
+}
+
+
 
 
