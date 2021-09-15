@@ -6,6 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="f3c6efb5-57ff-47b6-a5f9-9f6bc1a4826a" name="변경" comment="sdf">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doselenium.py" beforeDir="false" afterPath="$PROJECT_DIR$/doselenium.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,12 +25,12 @@
               <option name="branches">
                 <list>
                   <RecentBranch>
-                    <option name="branchName" value="master" />
-                    <option name="lastUsedInstant" value="1631600636" />
+                    <option name="branchName" value="beatrix" />
+                    <option name="lastUsedInstant" value="1631718475" />
                   </RecentBranch>
                   <RecentBranch>
-                    <option name="branchName" value="beatrix" />
-                    <option name="lastUsedInstant" value="1631600544" />
+                    <option name="branchName" value="master" />
+                    <option name="lastUsedInstant" value="1631600636" />
                   </RecentBranch>
                 </list>
               </option>
@@ -158,7 +159,25 @@
     <MESSAGE value="sdf" />
     <option name="LAST_COMMIT_MESSAGE" value="sdf" />
   </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/doselenium.py</url>
+          <line>82</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+      </breakpoints>
+      <default-breakpoints>
+        <breakpoint type="python-exception">
+          <properties notifyOnTerminate="true" exception="BaseException">
+            <option name="notifyOnTerminate" value="true" />
+          </properties>
+        </breakpoint>
+      </default-breakpoints>
+    </breakpoint-manager>
+  </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/hanghae99_30_mini_project$doselenium.coverage" NAME="doselenium 커버리지 결과" MODIFIED="1631717295449" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/hanghae99_30_mini_project$doselenium.coverage" NAME="doselenium 커버리지 결과" MODIFIED="1631719372671" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
