@@ -46,6 +46,7 @@ def 크롤링():
     doc = {
         'albumtitle':title,             ## 앨범 타이틀
         'albumimage':image,             ## 앨범 이미지
+        'artist': artist,               ## 가수명
         'date':desc,                    ## 앨범 발매일
         'genre':url_receive,            ## 앨범 장르
         'agency':comment_receive,       ## 앨범 기획사
