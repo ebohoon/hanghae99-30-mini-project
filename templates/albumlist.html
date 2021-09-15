@@ -30,21 +30,92 @@
         .btn-primary {
             margin: auto 17px auto 17px;
         }
+
         .date {
             color: gray;
             font-size: 12px;
         }
+
+        .card {
+            display: inline-block;
+        }
+
+        .col-md-1 {
+            margin-left: 15%;
+        }
+
     </style>
+
+    <script>
+        function showReview() {
+            $.ajax({
+                type: "GET",
+                url: "/review",
+                data: {},
+                success: function (response) {
+                    alert(response["msg"]);
+                }
+            })
+        }
+
+        function makeReview() {
+            $.ajax({
+                type: "POST",
+                url: "/review",
+                data: {sample_give: '샘플데이터'},
+                success: function (response) {
+                    alert(response['msg'])
+                }
+            })
+        }
+
+        $(document).ready(function () {
+            listing()
+        })
+
+        function listing() {
+            $.ajax({
+                type: "GET",
+                url: "/listing",
+                data: {},
+                success: function (response) {
+                    let album = response['album']
+                    $('#test').empty()
+                    for (let i = 0; i < 3; i++) {
+                        let albumtitle = album[i]['albumtitle']
+                        let genre = album[i]['genre']
+                        let date = album[i]['date']
+                        let albumimage = album[i]['albumimage']
+
+                        let temp_html = `<div class="col-md-1">
+                                            <div class="card" style="width: 18rem;">
+                                                <img class="card-img-top"
+                                                     src="${albumimage}"
+                                                     alt="Card image cap">
+                                                <div class="card-body">
+                                                    <p class="card-title">${albumtitle}</p>
+                                                    <div class="date">[${genre}]</div>
+                                                    <p class="date">${date}</p>
+                                                    <button onclick="showReview()" type="button" class="btn btn-primary">리뷰보기</button>
+                                                    <button onclick="makeReview()" type="button" class="btn btn-primary">리뷰쓰기</button>
+                                                </div>
+                                            </div>
+                                        </div>`
+
+                        $('#test').append(temp_html)
+                    }
+                }
+            });
+        }
+    </script>
+
 </head>
 
 <body>
 <!-- 해더 시작부분 -->
 <header w3-include-html="header" class="head">
-
 </header>
 
-<div class="menu">
-</div>
 
 <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
     <ol class="carousel-indicators">
@@ -52,46 +123,59 @@
         <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
         <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
     </ol>
+    <!-- 제일큰 박스-->
     <div class="carousel-inner">
+        <!-- 한 페이지 박스-->
         <div class="carousel-item active">
             <div class="container-fluid">
-                <div class="row">
-                    <!--여기가 한그리드-->
-                    <div class="col-sm-6 d-flex justify-content-center">
-                        <!--여기서 부터 카드-->
+                <div class="row" id="test">
+                    <!-- 카드-->
+                    <div class="col-md-1">
                         <div class="card" style="width: 18rem;">
                             <img class="card-img-top"
-                                 src="https://image.genie.co.kr/Y/IMAGE/IMG_ALBUM/082/055/361/82055361_1621563082144_1_600x600.JPG/dims/resize/Q_80,0"
+                                 src="https://image.genie.co.kr/Y/IMAGE/IMG_ALBUM/081/545/399/81545399_1600401677905_1_600x600.JPG/dims/resize/Q_80,0"
                                  alt="Card image cap">
                             <div class="card-body">
-                                <p class="card-title">Butter</p>
+                                <p class="card-title">Dynamite</p>
                                 <div class="date">[싱글]</div>
-                                <p class="date">2021.05.21</p>
-                                <button type="button" class="btn btn-primary">리뷰보기</button>
-                                <button type="button" class="btn btn-primary">리뷰쓰기</button>
-                            </div>
-                        </div>
-                        <!--카드 끝-->
-                    </div>
-                    <!--여기가 한그리드-->
-                    <div class="col-sm-6 d-flex justify-content-center">
-                        <div class="card" style="width: 18rem;">
-                            <img class="card-img-top"
-                                 src="https://image.genie.co.kr/Y/IMAGE/IMG_ALBUM/082/131/679/82131679_1625795131913_1_600x600.JPG/dims/resize/Q_80,0"
-                                 alt="Card image cap">
-                            <div class="card-body">
-                                <p class="card-title">Butter / Permission to Dance</p>
-                                <div class="date">[싱글]</div>
-                                <p class="date">2021.07.09</p>
-                                <button type="button" class="btn btn-primary">리뷰보기</button>
-                                <button type="button" class="btn btn-primary">리뷰쓰기</button>
+                                <p class="date">2020.08.21</p>
+                                <button onclick="showReview()" type="button" class="btn btn-primary">리뷰보기</button>
+                                <button onclick="makeReview()" type="button" class="btn btn-primary">리뷰쓰기</button>
                             </div>
                         </div>
                     </div>
+                    <div class="col-md-1">
+                        <div class="card" style="width: 18rem;">
+                            <img class="card-img-top"
+                                 src="https://image.genie.co.kr/Y/IMAGE/IMG_ALBUM/081/545/399/81545399_1600401677905_1_600x600.JPG/dims/resize/Q_80,0"
+                                 alt="Card image cap">
+                            <div class="card-body">
+                                <p class="card-title">Dynamite</p>
+                                <div class="date">[싱글]</div>
+                                <p class="date">2020.08.21</p>
+                                <button onclick="showReview()" type="button" class="btn btn-primary">리뷰보기</button>
+                                <button onclick="makeReview()" type="button" class="btn btn-primary">리뷰쓰기</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-1">
+                        <div class="card" style="width: 18rem;">
+                            <img class="card-img-top"
+                                 src="https://image.genie.co.kr/Y/IMAGE/IMG_ALBUM/081/545/399/81545399_1600401677905_1_600x600.JPG/dims/resize/Q_80,0"
+                                 alt="Card image cap">
+                            <div class="card-body">
+                                <p class="card-title">Dynamite</p>
+                                <div class="date">[싱글]</div>
+                                <p class="date">2020.08.21</p>
+                                <button onclick="showReview()" type="button" class="btn btn-primary">리뷰보기</button>
+                                <button onclick="makeReview()" type="button" class="btn btn-primary">리뷰쓰기</button>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
-
         <div class="carousel-item">
             <div class="container-fluid">
                 <div class="row">
@@ -106,8 +190,8 @@
                                 <p class="card-title">Dynamite</p>
                                 <div class="date">[싱글]</div>
                                 <p class="date">2020.08.21</p>
-                                <button type="button" class="btn btn-primary">리뷰보기</button>
-                                <button type="button" class="btn btn-primary">리뷰쓰기</button>
+                                <button onclick="showReview()" type="button" class="btn btn-primary">리뷰보기</button>
+                                <button onclick="makeReview()" type="button" class="btn btn-primary">리뷰쓰기</button>
                             </div>
                         </div>
                         <!--카드 끝-->
@@ -122,11 +206,12 @@
                                 <p class="card-title">MAP OF THE SOUL : PERSONA</p>
                                 <div class="date">[싱글]</div>
                                 <p class="date">2019.04.12</p>
-                                <button type="button" class="btn btn-primary">리뷰보기</button>
-                                <button type="button" class="btn btn-primary">리뷰쓰기</button>
+                                <button onclick="showReview()" type="button" class="btn btn-primary">리뷰보기</button>
+                                <button onclick="makeReview()" type="button" class="btn btn-primary">리뷰쓰기</button>
                             </div>
                         </div>
                     </div>
+
                 </div>
             </div>
 
@@ -145,8 +230,8 @@
                                 <p class="card-title">BE</p>
                                 <div class="date">[싱글]</div>
                                 <p class="date">2020.11.20</p>
-                                <button type="button" class="btn btn-primary">리뷰보기</button>
-                                <button type="button" class="btn btn-primary">리뷰쓰기</button>
+                                <button onclick="showReview()" type="button" class="btn btn-primary">리뷰보기</button>
+                                <button onclick="makeReview()" type="button" class="btn btn-primary">리뷰쓰기</button>
                             </div>
                         </div>
                         <!--카드 끝-->
@@ -161,8 +246,8 @@
                                 <p class="card-title">MAP OF THE SOUL : 7</p>
                                 <div class="date">[정규]</div>
                                 <p class="date">2020.02.21</p>
-                                <button type="button" class="btn btn-primary">리뷰보기</button>
-                                <button type="button" class="btn btn-primary">리뷰쓰기</button>
+                                <button onclick="showReview()" type="button" class="btn btn-primary">리뷰보기</button>
+                                <button onclick="makeReview()" type="button" class="btn btn-primary">리뷰쓰기</button>
                             </div>
                         </div>
                     </div>
@@ -181,12 +266,11 @@
     </a>
 </div>
 
-
 </div>
 
 
 <!-- 푸터 시작부분 -->
-<!--    <footer w3-include-html = "footer" class="foot"></footer>-->
+<!-- <footer w3-include-html = "footer" class="foot"></footer>-->
 </body>
 <!-- 해더와 푸터를 불러옴 -->
 <script>
