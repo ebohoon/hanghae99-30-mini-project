@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="f3c6efb5-57ff-47b6-a5f9-9f6bc1a4826a" name="변경" comment="">
+    <list default="true" id="f3c6efb5-57ff-47b6-a5f9-9f6bc1a4826a" name="변경" comment="sdf">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -50,7 +53,29 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Python.doselenium">
+    <configuration name="doselenium" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="hanghae99-30-mini-project" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/doselenium.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="hanghae99-30-mini-project" type="PythonConfigurationType" factoryName="Python">
       <module name="hanghae99-30-mini-project" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -73,17 +98,24 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.doselenium" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="애플리케이션 수준" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="디폴트 작업">
-      <changelist id="6f038e5b-46a1-49e3-8087-9d454e40dc28" name="변경" comment="" />
+      <changelist id="f3c6efb5-57ff-47b6-a5f9-9f6bc1a4826a" name="변경" comment="sdf" />
       <created>1631593132336</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1631593132336</updated>
       <workItem from="1631593136671" duration="4189000" />
       <workItem from="1631597662598" duration="315000" />
+      <workItem from="1631717626174" duration="278000" />
+      <workItem from="1631717909950" duration="306000" />
     </task>
     <task id="LOCAL-00001" summary="sdf">
       <created>1631600287738</created>
@@ -109,7 +141,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="beatrix" />
+                        <option value="master" />
                       </list>
                     </value>
                   </entry>
@@ -125,5 +157,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="sdf" />
     <option name="LAST_COMMIT_MESSAGE" value="sdf" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/hanghae99_30_mini_project$doselenium.coverage" NAME="doselenium 커버리지 결과" MODIFIED="1631717295449" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
