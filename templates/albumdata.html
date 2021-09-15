@@ -20,41 +20,127 @@
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
 
+
+
     <!-- common.js부분 참조 -->
     <script src="../static/js/common.js"></script>
 
 
     <title>BTS!</title>
 </head>
+<script>
 
-<body>
+    function listing(test) {
+    
+        $.ajax({
+            type: "POST",
+            url: "/albumdata/find",
+            data: { sample_give: test },
+            success: function (response) {
+                test = response['msg']
+                
+                $("#titlename").html(`<h1>${test[0]["albumtitle"]}</h1>`)
+                $("#date").html(`${test[0]["date"]}`)
+                $("#genre").html(`${test[0]["genre"]}`)
+                $("#publisher").html(`${test[0]["publisher"]}`)
+                $("#agency").html(`${test[0]["agency"]}`)
+                $("#singtolist").empty()
+                for(let i = 0 ; i < test[0]["singlist"].length ; i++){
+                    $("#singtolist").append(`
+                    <tr>
+                        <th>
+                            <a href="${test[0]["singlist"][i][0]}">${test[0]["singlist"][i][1]}</a>
+                        </th>
+                    </tr>
+                    `)
+                }
+                
+
+            }
+        })
+    }
+    function reviewlisting(test) {
+        
+        $.ajax({
+            type: "POST",
+            url: "/albumdata/reviewfind",
+            data: { sample_give: test },
+            success: function (response) {
+                test = response['msg']
+                console.log(test)
+                
+                $("#reviewbody").empty();
+                for(let i = 0 ; i < test.length ; i++){
+                    console.log(test[i]["nickname"])
+                    console.log(test[i]["review"])
+                    console.log(test[i]["date"])
+                    
+                    $("#reviewbody").append(`
+                    <tr>
+                        <th>
+                            ${i+1}
+                        </th>
+                        <th>
+                            ${test[i]["nickname"]}
+                        </th>
+                        <th>
+                            ${test[i]["review"]}
+                        </th>
+                    </tr>
+                    `)
+                    
+                }
+            }
+        })
+    }
+
+</script>
+<style>
+    #bodytest{
+        margin: auto;
+        padding: auto;
+        width: 85%;
+    }
+</style>
+
+<body id = "bodytest">
     <!-- 해더 시작부분 -->
     <header w3-include-html="header" class="head"></header>
+    {%if msg%}
+    <script>
+        var mapping = "{{ data }}";
 
+        
+        listing(mapping);
+        reviewlisting(mapping);
+    </script>
+    {%endif%}
     <div class="row">
         <div class="col">
-        <img class="testimg"
-     src="https://cdnimg.melon.co.kr/cm/album/images/102/73/641/10273641_500.jpg?931a1f4b6e6c90752585d656e86f0842/melon/resize/282/quality/80/optimize"
-     alt="여기에 이미지 있어요!!">
+            <img class="testimg"
+                src="https://cdnimg.melon.co.kr/cm/album/images/102/73/641/10273641_500.jpg?931a1f4b6e6c90752585d656e86f0842/melon/resize/282/quality/80/optimize"
+                alt="여기에 이미지 있어요!!">
         </div>
         <div class="col">
-            <div id = "titlename"><h1>Permission to Dance</h1></div>
-            <div id = "abdata">
+            <div id="titlename">
+                <h1>여기에 오면 망한징조인데</h1>
+            </div>
+            <div id="abdata">
                 <div class="container">
                     <div class="row">
-                      <div class="col">발매일</div>
-                      <div class="col">2021.07.23</div>
-                      <div class="w-100"></div>
-                      <div class="col">장르</div>
-                      <div class="col">댄스,R&B/Soul</div>
-                      <div class="w-100"></div>
-                      <div class="col">발매사</div>
-                      <div class="col">YG PLUS</div>
-                      <div class="w-100"></div>
-                      <div class="col">기획사</div>
-                      <div class="col">BLGHIT MUSIC</div>
+                        <div class="col">발매일</div>
+                        <div class="col" id="date">망했어..</div>
+                        <div class="w-100"></div>
+                        <div class="col">장르</div>
+                        <div class="col" id="genre">지옥판타지</div>
+                        <div class="w-100"></div>
+                        <div class="col">발매사</div>
+                        <div class="col" id="publisher">지옥</div>
+                        <div class="w-100"></div>
+                        <div class="col">기획사</div>
+                        <div class="col" id="agency">도도</div>
                     </div>
-                  </div>
+                </div>
             </div>
             <table class="table table-condensed">
                 <thead>
@@ -64,10 +150,10 @@
                         </th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody id = "singtolist">
                     <tr>
                         <th>
-                            <a href="https://www.melon.com/song/detail.htm?songId=31737197">작은것들을 위한시</a>
+                            <a href="https://www.melon.com/song/detail.htm?songId=31737197">진짜 망한것들의 노래</a>
                         </th>
                     </tr>
                 </tbody>
@@ -90,16 +176,16 @@
                 </th>
             </tr>
         </thead>
-        <tbody>
+        <tbody id = "reviewbody">
             <tr>
                 <th>
-                    1
+                    서른마흔다섯번
                 </th>
                 <th>
-                    가나다라
+                    도도
                 </th>
                 <th>
-                    오호호호홓
+                    으어 이페이지는 안되 돌아가 봐줄마음 없어
                 </th>
             </tr>
         </tbody>

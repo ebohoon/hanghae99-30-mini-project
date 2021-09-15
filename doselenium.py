@@ -15,13 +15,16 @@ sleep(5)  # 페이지가 로딩되는 동안 5초 간 기다립니다.
 driver.execute_script(
     "document.querySelector('#conts > div.section_atist > div > div.atist_dtl_info > div > a').click();")
 sleep(1)
+
 driver.execute_script("document.querySelector('#conts > div.wrap_tab_atist > ul > li:nth-child(4) > a').click();")
 #conts > div.wrap_tab_atist > ul > li:nth-child(4) > a
 sleep(1)
+
 req = driver.page_source
 soup = BeautifulSoup(req, 'html.parser')
 song_list = soup.select('#frm > div > ul > li')
 song_num = len(song_list)
+
 def crawling():
     for i in range(1, song_num + 1):
         driver.execute_script(f"document.querySelector('#frm > div > ul > li:nth-child({i}) > div > a.thumb').click();")
@@ -87,3 +90,4 @@ while True:
     except:
         break
 driver.quit()
+
