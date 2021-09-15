@@ -103,8 +103,9 @@
         })
     }
     function test(test){ 	
-        var a = test.data
-        console.log(a)
+        
+        console.log($(test))
+        console.dir($(test))
     }
 
 </script>
@@ -192,13 +193,13 @@
         </thead>
         <tbody id = "reviewbody">
             <tr href="javascript:void(0);" onclick="test(this);">
-                <th>
+                <th id = "num">
                     서른마흔다섯번
                 </th>
-                <th>
+                <th id = "name">
                     도도
                 </th>
-                <th test = "127.01.0144">
+                <th test = "127.01.0144" id = "review">
                     으어 이페이지는 안되 돌아가 봐줄마음 없어
                 </th>
             </tr>
