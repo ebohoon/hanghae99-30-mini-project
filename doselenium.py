@@ -1,6 +1,7 @@
 from bs4 import BeautifulSoup
 from selenium import webdriver
 from time import sleep
+import re
 
 driver = webdriver.Chrome('D:/selenium/chromedriver_win32/chromedriver')  # 드라이버를 실행합니다.
 
@@ -27,37 +28,40 @@ soup = BeautifulSoup(req, 'html.parser')  # 가져온 정보를 beautifulsoup으
 songs = soup.select("#conts > div.section_info > div > div.entry")
 print("---------------------------------------")
 
+
+sing = soup.select("#frm > div > table > tbody")
+
+sings = sing[0].find_all("div",{"class": "ellipsis"})
+href = sing[0].find_all("a",{"class": "song_info"})
+
+singlist = []
+a1 = []
+b1 = []
+for te in sings[0::2]:
+    title = te.text.strip().replace('\n', '.')
+    a1.append(title)
+    # print(title)
+
+
+##정규식으로 바꾸기
+dotest = re.compile("[0-9]+")
+for t1 in href:
+    wht = t1["href"]
+    test = dotest.search(wht).group()
+    b1.append(test)
+
+for i in zip(a1, b1):
+    singlist.append(i)
+
 title = songs[0].select_one("div.info > div.song_name").text.strip()[-3:]
 artist = songs[0].select_one("div.info > div.artist").text.strip()
 date = songs[0].select("div.meta > dl > dd")[0].text
 genre = songs[0].select("div.meta > dl > dd")[1].text
 Publisher = songs[0].select("div.meta > dl > dd")[2].text
 agency = songs[0].select("div.meta > dl > dd")[3].text
-sing = soup.select("#frm > div > table > tbody")
-
-sings = sing[0].find_all("div",{"class": "ellipsis"})
-href = sing[0].find_all("a",{"class": "song_info"})
-# btn button_icons type03 song_info
-# print(sing[0].find_all("div",{"class": "ellipsis"})[1].text)
-    # doc = {
-    #     'albumtitle':title,             ## 앨범 타이틀
-    #     'albumimage':image,             ## 앨범 이미지
-    #     'artist': artist,               ## 가수명
-    #     'date':desc,                    ## 앨범 발매일
-    #     'genre':url_receive,            ## 앨범 장르
-    #     'agency':comment_receive,       ## 앨범 기획사
-    #     'singlist':singlist             ## 앨범 곡리스트
-    # }
+##singlist 이게 곡리스트에요 리스트형태 (노래제목, 링크대체번호) ex)[('Title.눈물 (Feat. 유진 Of 더 씨야)', '4020215'), ('눈물 (Inst.)', '4020216')]
+##여기까지 만들었습니다.
 
 
-for te in sings[0::2]:
-    title = te.text.strip().replace('\n', '.')
-    
-    # print(title)
-
-
-##정규식으로 바꾸기
-for t1 in href:
-    test = t1["href"]
-
-    print(test)
+#test 프린트
+print(title,artist,date,genre,Publisher,agency)
