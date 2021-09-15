@@ -38,6 +38,9 @@
         .card {
             display: inline-block;
         }
+        .col-md-1{
+            margin-left: 15%;
+        }
     </style>
 
     <script>
@@ -64,7 +67,7 @@
         }
 
         $(document).ready(function () {
-            listing()
+            
         })
         function listing() {
             $.ajax({
@@ -73,24 +76,31 @@
                 data: {},
                 success: function (response) {
                     let album = response['album']
-                    for (let i = 0; i < album.length; i++) {
+                    $('#test').empty()
+                    for (let i = 0; i < 3; i++) {
                         let albumtitle = album[i]['albumtitle']
                         let genre = album[i]['genre']
                         let date = album[i]['date']
                         let albumimage = album[i]['albumimage']
-
-                        let temp_html = `<img class="card-img-top"
-                                                 src="${albumimage}"
-                                                 alt="Card image cap">
-                                            <div class="card-body">
-                                                <p class="card-title">${albumtitle}</p>
-                                                <div class="date">[${genre}]</div>
-                                                <p class="date">${date}</p>
-                                                <button onclick="showReview()" type="button" class="btn btn-primary">리뷰보기</button>
-                                                <button onclick="makeReview()" type="button" class="btn btn-primary">리뷰쓰기</button>
-                                            </div>`
-
-                        $('#cards-box').append(temp_html)
+                        
+                        let temp_html = `
+                        <div class="col-md-1">
+                            <div class="card" style="width: 18rem;">
+                                <img class="card-img-top"
+                                     src="https://image.genie.co.kr/Y/IMAGE/IMG_ALBUM/081/545/399/81545399_1600401677905_1_600x600.JPG/dims/resize/Q_80,0"
+                                     alt="Card image cap">
+                                <div class="card-body">
+                                    <p class="card-title">Dynamite</p>
+                                    <div class="date">[싱글]</div>
+                                    <p class="date">2020.08.21</p>
+                                    <button onclick="showReview()" type="button" class="btn btn-primary">리뷰보기</button>
+                                    <button onclick="makeReview()" type="button" class="btn btn-primary">리뷰쓰기</button>
+                                </div>
+                            </div>
+                        </div>
+                        `
+                                    
+                        $('#test').append(temp_html)
                     }
                 }
             });
@@ -114,21 +124,50 @@
     <div class="carousel-inner">
         <div class="carousel-item active">
             <div class="container-fluid">
-                <div class="row">
-                    <!--여기가 한그리드-->
-                    <div class="col-sm-6 d-flex justify-content-center">
-                        <!--여기서 부터 카드-->
-                        <div id="cards-box" class="card" style="width: 18rem;">
-
-                        </div>
-                        <!--카드 끝-->
-                    </div>
-                    <!--여기가 한그리드-->
-                    <div class="col-sm-6 d-flex justify-content-center">
+                <div class="row" id = "test">
+                    <div class="col-md-1">
                         <div class="card" style="width: 18rem;">
-
+                            <img class="card-img-top"
+                                 src="https://image.genie.co.kr/Y/IMAGE/IMG_ALBUM/081/545/399/81545399_1600401677905_1_600x600.JPG/dims/resize/Q_80,0"
+                                 alt="Card image cap">
+                            <div class="card-body">
+                                <p class="card-title">Dynamite</p>
+                                <div class="date">[싱글]</div>
+                                <p class="date">2020.08.21</p>
+                                <button onclick="showReview()" type="button" class="btn btn-primary">리뷰보기</button>
+                                <button onclick="makeReview()" type="button" class="btn btn-primary">리뷰쓰기</button>
+                            </div>
                         </div>
                     </div>
+                    <div class="col-md-1">
+                        <div class="card" style="width: 18rem;">
+                            <img class="card-img-top"
+                                 src="https://image.genie.co.kr/Y/IMAGE/IMG_ALBUM/081/545/399/81545399_1600401677905_1_600x600.JPG/dims/resize/Q_80,0"
+                                 alt="Card image cap">
+                            <div class="card-body">
+                                <p class="card-title">Dynamite</p>
+                                <div class="date">[싱글]</div>
+                                <p class="date">2020.08.21</p>
+                                <button onclick="showReview()" type="button" class="btn btn-primary">리뷰보기</button>
+                                <button onclick="makeReview()" type="button" class="btn btn-primary">리뷰쓰기</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-1">
+                        <div class="card" style="width: 18rem;">
+                            <img class="card-img-top"
+                                 src="https://image.genie.co.kr/Y/IMAGE/IMG_ALBUM/081/545/399/81545399_1600401677905_1_600x600.JPG/dims/resize/Q_80,0"
+                                 alt="Card image cap">
+                            <div class="card-body">
+                                <p class="card-title">Dynamite</p>
+                                <div class="date">[싱글]</div>
+                                <p class="date">2020.08.21</p>
+                                <button onclick="showReview()" type="button" class="btn btn-primary">리뷰보기</button>
+                                <button onclick="makeReview()" type="button" class="btn btn-primary">리뷰쓰기</button>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
