@@ -30,11 +30,37 @@
         .btn-primary {
             margin: auto 17px auto 17px;
         }
+
         .date {
             color: gray;
             font-size: 12px;
         }
     </style>
+
+    <script>
+        function showReview() {
+            $.ajax({
+                type: "GET",
+                url: "/review",
+                data: {},
+                success: function (response) {
+                    alert(response["msg"]);
+                }
+            })
+        }
+
+        function makeReview() {
+            $.ajax({
+                type: "POST",
+                url: "/review",
+                data: {sample_give: '샘플데이터'},
+                success: function (response) {
+                    alert(response['msg'])
+                }
+            })
+        }
+    </script>
+
 </head>
 
 <body>
@@ -67,8 +93,8 @@
                                 <p class="card-title">Butter</p>
                                 <div class="date">[싱글]</div>
                                 <p class="date">2021.05.21</p>
-                                <button type="button" class="btn btn-primary">리뷰보기</button>
-                                <button type="button" class="btn btn-primary">리뷰쓰기</button>
+                                <button onclick="showReview()" type="button" class="btn btn-primary">리뷰보기</button>
+                                <button onclick="makeReview()" type="button" class="btn btn-primary">리뷰쓰기</button>
                             </div>
                         </div>
                         <!--카드 끝-->
@@ -83,8 +109,8 @@
                                 <p class="card-title">Butter / Permission to Dance</p>
                                 <div class="date">[싱글]</div>
                                 <p class="date">2021.07.09</p>
-                                <button type="button" class="btn btn-primary">리뷰보기</button>
-                                <button type="button" class="btn btn-primary">리뷰쓰기</button>
+                                <button onclick="showReview()" type="button" class="btn btn-primary">리뷰보기</button>
+                                <button onclick="makeReview()" type="button" class="btn btn-primary">리뷰쓰기</button>
                             </div>
                         </div>
                     </div>
@@ -106,8 +132,8 @@
                                 <p class="card-title">Dynamite</p>
                                 <div class="date">[싱글]</div>
                                 <p class="date">2020.08.21</p>
-                                <button type="button" class="btn btn-primary">리뷰보기</button>
-                                <button type="button" class="btn btn-primary">리뷰쓰기</button>
+                                <button onclick="showReview()" type="button" class="btn btn-primary">리뷰보기</button>
+                                <button onclick="makeReview()" type="button" class="btn btn-primary">리뷰쓰기</button>
                             </div>
                         </div>
                         <!--카드 끝-->
@@ -122,8 +148,8 @@
                                 <p class="card-title">MAP OF THE SOUL : PERSONA</p>
                                 <div class="date">[싱글]</div>
                                 <p class="date">2019.04.12</p>
-                                <button type="button" class="btn btn-primary">리뷰보기</button>
-                                <button type="button" class="btn btn-primary">리뷰쓰기</button>
+                                <button onclick="showReview()" type="button" class="btn btn-primary">리뷰보기</button>
+                                <button onclick="makeReview()" type="button" class="btn btn-primary">리뷰쓰기</button>
                             </div>
                         </div>
                     </div>
@@ -145,8 +171,8 @@
                                 <p class="card-title">BE</p>
                                 <div class="date">[싱글]</div>
                                 <p class="date">2020.11.20</p>
-                                <button type="button" class="btn btn-primary">리뷰보기</button>
-                                <button type="button" class="btn btn-primary">리뷰쓰기</button>
+                                <button onclick="showReview()" type="button" class="btn btn-primary">리뷰보기</button>
+                                <button onclick="makeReview()" type="button" class="btn btn-primary">리뷰쓰기</button>
                             </div>
                         </div>
                         <!--카드 끝-->
@@ -161,8 +187,8 @@
                                 <p class="card-title">MAP OF THE SOUL : 7</p>
                                 <div class="date">[정규]</div>
                                 <p class="date">2020.02.21</p>
-                                <button type="button" class="btn btn-primary">리뷰보기</button>
-                                <button type="button" class="btn btn-primary">리뷰쓰기</button>
+                                <button onclick="showReview()" type="button" class="btn btn-primary">리뷰보기</button>
+                                <button onclick="makeReview()" type="button" class="btn btn-primary">리뷰쓰기</button>
                             </div>
                         </div>
                     </div>
