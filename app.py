@@ -37,6 +37,10 @@ def login():
 def albumdata():
     return render_template('albumdata.html')
 
+@app.route('/albumlist')
+def albumlist():
+    return render_template('albumlist.html')
+
 #엘범 정보 크롤링 만들예정인 공간
 def 크롤링():
     doc = {
