@@ -35,12 +35,15 @@
             color: gray;
             font-size: 12px;
         }
+
         .card {
             display: inline-block;
         }
-        .col-md-1{
+
+        .col-md-1 {
             margin-left: 15%;
         }
+
     </style>
 
     <script>
@@ -69,6 +72,7 @@
         $(document).ready(function () {
             listing()
         })
+
         function listing() {
             $.ajax({
                 type: "GET",
@@ -110,8 +114,8 @@
 <body>
 <!-- 해더 시작부분 -->
 <header w3-include-html="header" class="head">
-
 </header>
+
 
 <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
     <ol class="carousel-indicators">
@@ -119,10 +123,13 @@
         <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
         <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
     </ol>
+    <!-- 제일큰 박스-->
     <div class="carousel-inner">
+        <!-- 한 페이지 박스-->
         <div class="carousel-item active">
             <div class="container-fluid">
-                <div class="row" id = "test">
+                <div class="row" id="test">
+                    <!-- 카드-->
                     <div class="col-md-1">
                         <div class="card" style="width: 18rem;">
                             <img class="card-img-top"
@@ -169,7 +176,6 @@
                 </div>
             </div>
         </div>
-
         <div class="carousel-item">
             <div class="container-fluid">
                 <div class="row">
@@ -260,12 +266,11 @@
     </a>
 </div>
 
-
 </div>
 
 
 <!-- 푸터 시작부분 -->
-<!--    <footer w3-include-html = "footer" class="foot"></footer>-->
+<!-- <footer w3-include-html = "footer" class="foot"></footer>-->
 </body>
 <!-- 해더와 푸터를 불러옴 -->
 <script>
