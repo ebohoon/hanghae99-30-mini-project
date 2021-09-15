@@ -1,5 +1,8 @@
-from flask import Flask, render_template, jsonify, request, flash
+from flask import Flask, render_template, jsonify, request, flash, session
 app = Flask(__name__)
+
+#테스트 improt
+from bson.json_util import dumps
 
 ##파이 몽고 DB
 from pymongo import MongoClient
@@ -38,6 +41,26 @@ def login():
 @app.route('/albumdata')
 def albumdata():
     return render_template('albumdata.html')
+
+@app.route('/orderlist/find', methods=['POST'])
+def find_orderlist():
+    ##로그인 확인
+    id = session.get('logged_in')
+    ##로그인이 안되어있으면.. 아직 쓸모없음 
+    # if id is not None:
+    #     test = list(db.users.find({'userid':id}))[0]['orderlisttest']
+        
+    #     test1 = []
+    #     for a in test:
+    #         test1.append(list(db.order.find({'_id':ObjectId(a)}))[0])
+    #     #print(test1)
+    #     return jsonify({'orderlist':dumps(test1), 'msg':'조회완료!'})
+    
+    phone = request.form['phone']
+    orderlist = list(db.album.find({'phone':phone}))
+    return jsonify({'orderlist':dumps(orderlist), 'msg':'조회완료!'})
+    
+    
 
 #엘범 정보 크롤링 만들예정인 공간
 @app.route('/temptestdo', methods=["GET", "POST"])
