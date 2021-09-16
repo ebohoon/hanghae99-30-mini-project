@@ -28,6 +28,11 @@
 
 <script>
     function reviewWrite() {
+        let name = $('#name').val()
+        let oneReview = $('#oneReview').val()
+        let rate = $('#rate').val()
+        let detailReview = $('#detailReview').val()
+
         $.ajax({
             type: "POST",
             url: "/write",
@@ -62,7 +67,7 @@
         width: 800px;
     }
 
-    #test2 {
+    #detailReview {
         height: 150px;
         width: 700px;
     }
@@ -143,20 +148,20 @@
 
 <section>
     <div class="review-table">
-    <p>작성자 {nickname} </p>
+    <p id="name">작성자 {nickname} </p>
     <p>
     <div class="form-inline">
         <div class="form-group">
-            <label for="inputPassword6">한줄평</label>
+            <label for="inputPassword6" id="oneReview">한줄평</label>
             <input type="text" id="test" class="form-control mx-sm-3" aria-describedby="passwordHelpInline"
                    placeholder="60자 이내로 써주세요!">
         </div>
     </div>
     </p>
-    <p>평점 {여기에 별표 와야함}</p>
+    <p id="rate">평점 {여기에 별표 와야함}</p>
     <div>
         <div class="form-group">
-        <textarea class="form-control" id="test2" placeholder="더 자세한 이야기를 써주세요!"
+        <textarea class="form-control" id="detailReview" placeholder="더 자세한 이야기를 써주세요!"
                   rows="3"></textarea>
         </div>
     </div>
