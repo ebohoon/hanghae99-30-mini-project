@@ -14,20 +14,20 @@ url = "https://www.melon.com/search/total/index.htm?q=bts&section=&mwkLogType=T"
 # data = requests.get(url, headers=headers)
 
 driver.get(url)  # 드라이버에 해당 url의 웹페이지를 띄웁니다.
-sleep(5)  # 페이지가 로딩되는 동안 5초 간 기다립니다.
+sleep(1)  # 페이지가 로딩되는 동안 5초 간 기다립니다.
 
 driver.execute_script(
     "document.querySelector('#conts > div.section_atist > div > div.atist_dtl_info > div > a').click();")
-sleep(1)
+sleep(0.5)
 
 driver.execute_script("document.querySelector('#conts > div.wrap_tab_atist > ul > li:nth-child(4) > a').click();")
 # conts > div.wrap_tab_atist > ul > li:nth-child(4) > a
-sleep(1)
+sleep(0.5)
 
 req = driver.page_source
 soup = BeautifulSoup(req, 'html.parser')
-page_list = soup.select('#pageObjNavgation > div > span > a')
-page_num = len(page_list) + 1
+# page_list = soup.select('#pageObjNavgation > div > span > a')
+# page_num = len(page_list) + 1
 song_list = soup.select('#frm > div > ul > li')
 song_num = len(song_list)
 
@@ -98,16 +98,20 @@ def crawling():
             'agency': agency,
             'img': img
         }
+        print(doc)
         db.album1.insert_one(doc)
         driver.back()
 
+page = 2
 
 while True:
     try:
         crawling()
-        driver.execute_script("document.querySelector('#pageObjNavgation > div > span > a')")
+        print(page)
+        driver.execute_script(f"document.querySelector('#pageObjNavgation > div > span > a:nth-child({page})').click();")
+        page += 1
     except:
         print('데이터 수집 완료')
         break
-
 driver.quit()
+
