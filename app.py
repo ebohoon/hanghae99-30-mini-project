@@ -1,4 +1,4 @@
-from flask import Flask, render_template, jsonify, request, flash
+from flask import Flask, render_template, jsonify, request, flash, session
 app = Flask(__name__)
 
 ##파이 몽고 DB
@@ -29,12 +29,39 @@ def header():
 def footer():
     return render_template('footer.html')
 
-
+## 로그인 페이지로 이동
 @app.route('/login')
 def login():
     return render_template('login.html')
 
+@app.route('/login_main', methods=['GET', 'POST'])
+def member_login():
+    if request.method == 'GET':
+        return render_template('login.html')
+    elif request.method == 'POST':
+        userid = request.form.get("userid", type=str)
+        pw = request.form.get("userPW", type=str)
 
+        if userid == "":
+            flash("아이디를 입력하세요")
+            return render_template('login.html')
+        elif pw == "":
+            flash("비밀번호를 입력하세요")
+            return render_template('login.html')
+        else:
+            users = db.users
+            id_check = users.find_one({"userid": userid})
+            # print(id_check["pw"])
+            # print(generate_password_hash(pw))
+            if id_check is None:
+                flash("아이디가 존재하지 않습니다.")
+                return render_template('login.html')
+            elif id_check["pw"] == pw:
+                session["logged_in"] = userid
+                return render_template('index.html' , userid = userid)
+            else:
+                flash("비밀번호가 틀렸습니다.")
+                return render_template('login.html')
 @app.route('/albumdata')
 def albumdata():
     return render_template('albumdata.html')
