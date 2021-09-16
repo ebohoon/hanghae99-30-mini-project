@@ -68,8 +68,10 @@ def find_reviewlist():
 
 @app.route('/albumdata/onereview', methods=['POST'])
 def find_reviewone():
-    titlere = request.form['sample_give']
-    albumliset = list(db.review.find({"albumtitle": titlere, "date": "2021.09.11"},{'_id':False}))
+    name = request.form['name']
+    date = request.form['date']
+    print(name)
+    albumliset = list(db.review.find({"albumtitle": "Butter", "date": "2021.09.11", "nickname": name},{'_id':False}))
     print(albumliset)
     return jsonify({'msg':albumliset})
 
