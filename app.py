@@ -80,25 +80,24 @@ def albumlist():
 def albumreview():
     return render_template('albumreview.html')
 
-# 앨범리뷰 API
+# 앨범리뷰쓰기 API
 @app.route('/write', methods=['POST'])
 def reviewWrite():
-    name_receive = request.args.get('name_give')
-    oneReview_receive = request.args.get('oneReview_give')
-    rate_receive = request.args.get('rate_give')
-    detailReview_receive = request.args.get('detailReview_give')
+    name_receive = request.form['name_give']
+    oneReview_receive = request.form['oneReview_give']
+    rate_receive = request.form['rate_give']
+    detailReview_receive = request.form['detailReview_give']
 
     doc = {
-        'name': '작성자',               # name_receive
-        'oneReview': '한줄평',          # oneReview_receive
-        'rate': '펑점',                 # rate_receive
-        'detailReview': '자세한 이야기'   # detailReview_receive
+        'name': name_receive,               # name_receive
+        'oneReview': oneReview_receive,          # oneReview_receive
+        'rate': rate_receive,                 # rate_receive
+        'detailReview': detailReview_receive   # detailReview_receive
     }
-
     db.review.insert_one(doc)
-    return jsonify({'msg': '리뷰 작성!'})
+    return jsonify({'msg': '리뷰를 작성했습니다!'})
 
-# 앨범리뷰 API
+# 앨범리뷰삭제 API
 @app.route('/delete', methods=['POST'])
 def reviewDelete():
     name_receive = request.form['name_give']
@@ -111,17 +110,17 @@ def listing():
     album = list(db.album.find({}, {'_id': False}))
     return jsonify({'album': album})
 
-# 앨범리스트 API
+# 앨범리스트 리뷰 보기 API
 @app.route('/review', methods=['GET'])
 def show_review():
     sample_receive = request.args.get('sample_give')
     print(sample_receive)
-    return jsonify({'msg': 'GET 연결 완료!'})
+    return jsonify({'msg': '리뷰를 보러 가볼까요?'})
 
-# 앨범리스트 API
+# 앨범리스트 리뷰 작성 API
 @app.route('/review', methods=['POST'])
 def make_review():
-    return jsonify({'msg': 'POST 요청 완료!'})
+    return jsonify({'msg': '리뷰를 쓰러 가볼까요?'})
 
     flash("더미데이터 입력완료")
     return render_template('index.html')

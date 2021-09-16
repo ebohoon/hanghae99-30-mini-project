@@ -31,9 +31,15 @@
         $.ajax({
             type: "POST",
             url: "/write",
-            data: {name_give: name},
+            data: {
+                name_give: name,
+                oneReview_receive: oneReview,
+                rate_receive: rate,
+                detailReview_receive: detailReview
+            },
             success: function (response) {
                 alert(response['msg'])
+                window.location.href = '/albumdata'
             }
         });
     }
@@ -45,6 +51,7 @@
             data: {name_give: name},
             success: function (response) {
                 alert(response['msg'])
+                window.location.href = '/albumdata'
             }
         });
     }
