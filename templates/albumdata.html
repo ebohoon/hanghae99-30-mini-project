@@ -29,20 +29,36 @@
     <title>BTS!</title>
 </head>
 <script>
-    $(document).ready(function(){
+    $(document).on(function(){
         // memu 클래스 바로 하위에 있는 a 태그를 클릭했을때
         $(".reviewbody>tr").click(function(){
             if($(this).attr('vel') == 1){
                 $(this).next("tr").toggleClass("hide");
             }
         });
+        
         $(".dosometing").click(function(){
             $(this).parents("tr").toggleClass("hide")
             
             console.log("클릭은했네?")
         })
     });
+    $(document).on("click", ".reviewbody>tr", function() {
+        if($(this).attr('vel') == 1){
+            $(this).next("tr").toggleClass("hide");
+        }
+    });
 
+    
+    var mapping = "{{ data }}";
+    if(mapping != null){
+        console.log(mapping)
+        listing(mapping);
+        reviewlisting(mapping);
+    }
+
+
+    
     function listing(test) {
     
         $.ajax({
@@ -153,14 +169,7 @@
 <body id = "bodytest">
     <!-- 해더 시작부분 -->
     <header w3-include-html="header" class="head"></header>
-    {%if msg%}
-    <script>
-        var mapping = "{{ data }}";
-
-        listing(mapping);
-        reviewlisting(mapping);
-    </script>
-    {%endif%}
+  
     <div class="row">
         <div class="col">
             <img class="testimg"
