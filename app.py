@@ -93,7 +93,7 @@ def 크롤링():
 
     doc = {
         'albumtitle': "Butter",         ## 앨범 타이틀
-        'albumimage': "http://sdfsdj",         ## 앨범 이미지
+        'albumimage': "https://cdnimg.melon.co.kr/cm2/album/images/106/95/099/10695099_20210827102823_500.jpg?d999c8c02eeb31ea881ea04dca7c4ae8/melon/resize/282/quality/80/optimize",         ## 앨범 이미지
         'artist': "방탄",                ## 가수명
         'date': "2021.09.15",               ## 앨범 발매일
         'genre': "랩",                    ## 앨범 장르
@@ -115,9 +115,6 @@ def show_review():
 @app.route('/review', methods=['POST'])
 def make_review():
     return jsonify({'msg': 'POST 요청 완료!'})
-
-    flash("더미데이터 입력완료")
-    return render_template('index.html')
 
 
 ## 리뷰 더미데이터 생성
