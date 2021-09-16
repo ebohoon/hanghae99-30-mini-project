@@ -33,10 +33,39 @@ def header():
 def footer():
     return render_template('footer.html')
 
-
+## 로그인 페이지로 이동
 @app.route('/login')
 def login():
     return render_template('login.html')
+
+@app.route('/login_main', methods=['GET', 'POST'])
+def member_login():
+    if request.method == 'GET':
+        return render_template('login.html')
+    elif request.method == 'POST':
+        userid = request.form.get("userid", type=str)
+        pw = request.form.get("userPW", type=str)
+
+        if userid == "":
+            flash("아이디를 입력하세요")
+            return render_template('login.html')
+        elif pw == "":
+            flash("비밀번호를 입력하세요")
+            return render_template('login.html')
+        else:
+            users = db.users
+            id_check = users.find_one({"userid": userid})
+            # print(id_check["pw"])
+            # print(generate_password_hash(pw))
+            if id_check is None:
+                flash("아이디가 존재하지 않습니다.")
+                return render_template('login.html')
+            elif id_check["pw"] == pw:
+                session["logged_in"] = userid
+                return render_template('index.html' , userid = userid)
+            else:
+                flash("비밀번호가 틀렸습니다.")
+                return render_template('login.html')
 
 
 @app.route('/albumdata', methods=['GET'])
@@ -55,13 +84,23 @@ def albumdata():
 def find_alumdatalist():
     titlere = request.form['sample_give']
     albumliset = list(db.album.find({"albumtitle": titlere},{'_id':False}))
-    print(albumliset)
+    
     return jsonify({'msg':albumliset})
 
 @app.route('/albumdata/reviewfind', methods=['POST'])
 def find_reviewlist():
     titlere = request.form['sample_give']
     albumliset = list(db.review.find({"albumtitle": titlere},{'_id':False}))
+    
+    return jsonify({'msg':albumliset})
+
+
+@app.route('/albumdata/onereview', methods=['POST'])
+def find_reviewone():
+    name = request.form['name']
+    date = request.form['date']
+    print(name)
+    albumliset = list(db.review.find({"albumtitle": "Butter", "date": "2021.09.11", "nickname": name},{'_id':False}))
     print(albumliset)
     return jsonify({'msg':albumliset})
 
@@ -83,7 +122,7 @@ def 크롤링():
 
     doc = {
         'albumtitle': "Butter",         ## 앨범 타이틀
-        'albumimage': "http://sdfsdj",         ## 앨범 이미지
+        'albumimage': "https://cdnimg.melon.co.kr/cm2/album/images/106/95/099/10695099_20210827102823_500.jpg?d999c8c02eeb31ea881ea04dca7c4ae8/melon/resize/282/quality/80/optimize",         ## 앨범 이미지
         'artist': "방탄",                ## 가수명
         'date': "2021.09.15",               ## 앨범 발매일
         'genre': "랩",                    ## 앨범 장르
@@ -106,9 +145,6 @@ def show_review():
 def make_review():
     return jsonify({'msg': 'POST 요청 완료!'})
 
-    flash("더미데이터 입력완료")
-    return render_template('index.html')
-
 
 ## 리뷰 더미데이터 생성
 @app.route('/temptestdo11', methods=["GET", "POST"])
@@ -119,7 +155,7 @@ def 리뷰더미데이터():
         'review': "BTS최고다!",                 #한줄평
         'nickname': "도도",                     #닉네임
         'rete': "3",                            #별점
-        'date': "2021.09.15",                   #리뷰 날짜
+        'date': "2021.09.11",                   #리뷰 날짜
         'morereview': "랩",                     #리뷰
         'albumtitle': "Butter"                  #해당 엘범타이틀
     }
