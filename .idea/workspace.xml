@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="f3c6efb5-57ff-47b6-a5f9-9f6bc1a4826a" name="변경" comment="sdf">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/crawling.py" beforeDir="false" afterPath="$PROJECT_DIR$/crawling.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,12 +29,12 @@
               <option name="branches">
                 <list>
                   <RecentBranch>
-                    <option name="branchName" value="yumi_project" />
-                    <option name="lastUsedInstant" value="1631730131" />
+                    <option name="branchName" value="beatrix" />
+                    <option name="lastUsedInstant" value="1631777358" />
                   </RecentBranch>
                   <RecentBranch>
-                    <option name="branchName" value="beatrix" />
-                    <option name="lastUsedInstant" value="1631730031" />
+                    <option name="branchName" value="yumi_project" />
+                    <option name="lastUsedInstant" value="1631775260" />
                   </RecentBranch>
                 </list>
               </option>
@@ -55,7 +55,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../project03/prac_scrapping2.py" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../project04" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -146,6 +146,7 @@
       <option name="presentableId" value="Default" />
       <updated>1631751250829</updated>
       <workItem from="1631751260341" duration="17371000" />
+      <workItem from="1631777304339" duration="148000" />
     </task>
     <task id="LOCAL-00001" summary="sdf">
       <created>1631769054329</created>
