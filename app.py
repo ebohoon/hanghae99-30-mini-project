@@ -1,6 +1,7 @@
 from flask import Flask, render_template, jsonify, request, flash, session
 import jwt
 import hashlib
+import datetime
 
 app = Flask(__name__)
 
@@ -155,13 +156,17 @@ def reviewWrite():
     oneReview_receive = request.form['oneReview_give']
     rate_receive = request.form['rate_give']
     detailReview_receive = request.form['detailReview_give']
-
+    now = datetime.datetime.now()
+    nowDate = now.strftime('%Y.%m.%d')
     doc = {
-        'name': name_receive,               # 유저
-        'oneReview': oneReview_receive,          # 한줄평
-        'rate': rate_receive,                 # 평가
-        'detailReview': detailReview_receive   # 상세리뷰
+        'nickname': name_receive,               # 유저
+        'review': oneReview_receive,          # 한줄평
+        'rete': rate_receive,                 # 평가
+        'date': nowDate,  # 리뷰 날짜
+        'morereview': detailReview_receive,   # 상세리뷰
+        'albumtitle': "Butter"                  #댓글에 해당하는 엘범
     }
+    
     db.review.insert_one(doc)
     return jsonify({'msg': '리뷰를 작성했습니다!'})
 
@@ -240,7 +245,6 @@ def 리뷰더미데이터():
         'nickname': "도도",  # 닉네임
         'rete': "3",  # 별점
         'date': "2021.09.15",  # 리뷰 날짜
-        'date': "2021.09.11",  # 리뷰 날짜
         'morereview': "랩",  # 리뷰
         'albumtitle': "Butter"  # 해당 엘범타이틀
     }

@@ -47,16 +47,10 @@
     </style>
 
     <script>
-        function showReview() {
-            $.ajax({
-                type: "GET",
-                url: "/review",
-                data: {},
-                success: function (response) {
-                    alert(response["msg"]);
-                    window.location.href = '/albumdata'
-                }
-            })
+        function showReview(test) {
+            print(test)
+            window.location.href = '/albumdata?sample_give='+test
+           
         }
 
         function makeReview() {
@@ -99,7 +93,7 @@
                                     <p class="card-title">${albumtitle}</p>
                                     <div class="date">[${genre}]</div>
                                     <p class="date">${date}</p>
-                                    <button onclick="showReview()" type="button" class="btn btn-primary">리뷰보기</button>
+                                    <a href="/albumdata?sample_give=${albumtitle}"><button type="button" class="btn btn-primary">리뷰보기</button></a>
                                     <button onclick="makeReview()" type="button" class="btn btn-primary">리뷰쓰기</button>
                                 </div>
                             </div>
@@ -154,6 +148,7 @@
         <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
     </ol>
     <!-- 제일큰 박스-->
+    
     <div class="carousel-inner" id = "dobox">
         <!-- 한 페이지 박스-->
         <div class="carousel-item active">
