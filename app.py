@@ -75,8 +75,6 @@ def home():
             id_check = users.find_one({"id": userid})
             hapw = hashlib.sha256(pw.encode('utf-8')).hexdigest()
             
-            print(hapw)
-            print(id_check["password"])
             if id_check is None:
                 flash("아이디가 존재하지 않습니다.")
                 return render_template('index.html')
