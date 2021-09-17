@@ -82,6 +82,9 @@ def member_login():
 def sign_up():
     return render_template('register.html')
 
+@app.route('/dododo')
+def what():
+    return render_template('prac.html')
 
 @app.route('/sign_up/save', methods=['POST'])
 def sign_up_main():
