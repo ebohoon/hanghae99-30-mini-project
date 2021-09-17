@@ -100,7 +100,7 @@ def crawling():
             'singlist' : singlist
         }
         print(doc)
-        db.album1.insert_one(doc)
+        db.album.insert_one(doc)
         driver.back()
 
 page = 2
@@ -115,4 +115,3 @@ while True:
         print('데이터 수집 완료')
         break
 driver.quit()
-
