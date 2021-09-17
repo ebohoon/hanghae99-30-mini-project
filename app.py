@@ -88,7 +88,8 @@ def sign_up_main():
 @app.route('/check_dup_name', methods=['POST'])
 def check_dup_name():
     username_receive = request.form['username_give']
-    exists = bool(db.users.find({"username": username_receive}))
+    exists = bool(db.users.find_one({"username": username_receive}))
+    print(exists)
     return jsonify({'result': 'success', 'exists': exists})
 
 @app.route('/check_dup_id', methods=['POST'])
@@ -110,6 +111,27 @@ def sign_up():
     }
     db.users.insert_one(doc)
     return jsonify({'result': 'success'})
+
+
+# @app.route('/test1111', methods=['POST'])
+# def sign_up():
+#     # username_receive = request.form['username_give']
+#     # password_receive = request.form['password_give']
+#     # password_hash = hashlib.sha256(password_receive.encode('utf-8')).hexdigest()
+#     doc = {
+#         "username": "11",  # 아이디
+#         "password": password_hash,  # 비밀번호
+#         "profile_name": username_receive,  # 프로필 이름 기본값은 아이디
+
+#     }
+#     db.users.insert_one(doc)
+#     return jsonify({'result': 'success'})
+
+
+
+
+
+
 
 #-----------------------------------------------------------------------------
 @app.route('/albumdata', methods=['GET'])
