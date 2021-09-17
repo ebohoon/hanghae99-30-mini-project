@@ -35,12 +35,15 @@
         <div class="btn-group-toggle" data-toggle="buttons">
             {%if userid%}
             Nickname {{userid}}님
+            <label class="btn btn-secondary active" onclick="location.href='/logout'">
+                Logout
+            </label>
             {%else%}
             너뭐야 당장나가
-            {%endif%}
             <label class="btn btn-secondary active" onclick="location.href='/logout'">
-              Logout
-          </label>
+                로그인페이지로!
+            </label>
+          {%endif%}
         </div>
     </div>
     </h1>
