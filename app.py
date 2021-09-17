@@ -1,4 +1,6 @@
 from flask import Flask, render_template, jsonify, request, flash, session
+import jwt
+import hashlib
 
 app = Flask(__name__)
 
@@ -39,9 +41,61 @@ def footer():
     return render_template('footer.html')
 
 
+## 로그인 페이지로 이동
 @app.route('/login')
 def login():
     return render_template('login.html')
+
+
+@app.route('/login_main', methods=['GET', 'POST'])
+def member_login():
+    if request.method == 'GET':
+        return render_template('login.html')
+    elif request.method == 'POST':
+        userid = request.form.get("userid", type=str)
+        pw = request.form.get("userPW", type=str)
+
+        if userid == "":
+            flash("아이디를 입력하세요")
+            return render_template('login.html')
+        elif pw == "":
+            flash("비밀번호를 입력하세요")
+            return render_template('login.html')
+        else:
+            users = db.users
+            id_check = users.find_one({"userid": userid})
+            # print(id_check["pw"])
+            # print(generate_password_hash(pw))
+            if id_check is None:
+                flash("아이디가 존재하지 않습니다.")
+                return render_template('login.html')
+            elif id_check["pw"] == pw:
+                session["logged_in"] = userid
+                return render_template('index.html', userid=userid)
+            else:
+                flash("비밀번호가 틀렸습니다.")
+                return render_template('login.html')
+
+# 회원가입 페이지
+
+@app.route('/register')
+def sign_up():
+    return render_template('register.html')
+
+
+@app.route('/sign_up/save', methods=['POST'])
+def sign_up_main():
+    username_receive = request.form['username_give']
+    password_receive = request.form['password_give']
+    password_hash = hashlib.sha256(password_receive.encode('utf-8')).hexdigest()
+    doc = {
+        "username": username_receive,  # 아이디
+        "password": password_hash,  # 비밀번호
+        "profile_name": username_receive,  # 프로필 이름 기본값은 아이디
+
+    }
+    db.users.insert_one(doc)
+    return jsonify({'result': 'success'})
 
 
 @app.route('/albumdata', methods=['GET'])
@@ -61,6 +115,7 @@ def find_alumdatalist():
     titlere = request.form['sample_give']
     albumliset = list(db.album.find({"albumtitle": titlere}, {'_id': False}))
     print(albumliset)
+
     return jsonify({'msg': albumliset})
 
 
@@ -68,6 +123,16 @@ def find_alumdatalist():
 def find_reviewlist():
     titlere = request.form['sample_give']
     albumliset = list(db.review.find({"albumtitle": titlere}, {'_id': False}))
+
+    return jsonify({'msg': albumliset})
+
+
+@app.route('/albumdata/onereview', methods=['POST'])
+def find_reviewone():
+    name = request.form['name']
+    date = request.form['date']
+    print(name)
+    albumliset = list(db.review.find({"albumtitle": "Butter", "date": "2021.09.11", "nickname": name}, {'_id': False}))
     print(albumliset)
     return jsonify({'msg': albumliset})
 
@@ -95,6 +160,29 @@ def reviewWrite():
         'detailReview': '자세한 이야기'   # detailReview_receive
     }
 
+@app.route('/listing', methods=['GET'])
+def listing():
+    album = list(db.album.find({}, {'_id': False}))
+    return jsonify({'album': album})
+
+
+# 엘범 정보 크롤링 만들예정인 공간
+@app.route('/temptestdo', methods=["GET"])
+def 크롤링():
+    # testlist = [("test","testdo"),("test2","testdo2")]
+
+    doc = {
+        'albumtitle': "Butter",  ## 앨범 타이틀
+        'albumimage': "https://cdnimg.melon.co.kr/cm2/album/images/106/95/099/10695099_20210827102823_500.jpg?d999c8c02eeb31ea881ea04dca7c4ae8/melon/resize/282/quality/80/optimize",
+        ## 앨범 이미지
+        'artist': "방탄",  ## 가수명
+        'date': "2021.09.15",  ## 앨범 발매일
+        'genre': "랩",  ## 앨범 장르
+        'agency': "카카오",  ## 앨범 기획사
+        'publisher': "어딜까",  ## 앨범 발매사
+        'singlist': testlist  ## 앨범 곡리스트
+    }
+
     db.review.insert_one(doc)
     return jsonify({'msg': '리뷰 작성!'})
 
@@ -112,19 +200,18 @@ def listing():
     return jsonify({'album': album})
 
 # 앨범리스트 API
+
 @app.route('/review', methods=['GET'])
 def show_review():
     sample_receive = request.args.get('sample_give')
     print(sample_receive)
     return jsonify({'msg': 'GET 연결 완료!'})
 
+
 # 앨범리스트 API
 @app.route('/review', methods=['POST'])
 def make_review():
     return jsonify({'msg': 'POST 요청 완료!'})
-
-    flash("더미데이터 입력완료")
-    return render_template('index.html')
 
 
 # 엘범 정보 크롤링 만들예정인 공간
@@ -156,6 +243,7 @@ def 리뷰더미데이터():
         'nickname': "도도",  # 닉네임
         'rete': "3",  # 별점
         'date': "2021.09.15",  # 리뷰 날짜
+        'date': "2021.09.11",  # 리뷰 날짜
         'morereview': "랩",  # 리뷰
         'albumtitle': "Butter"  # 해당 엘범타이틀
     }

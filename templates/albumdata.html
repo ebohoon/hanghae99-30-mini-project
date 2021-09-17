@@ -29,6 +29,19 @@
     <title>BTS!</title>
 </head>
 <script>
+    $(document).ready(function(){
+        // memu 클래스 바로 하위에 있는 a 태그를 클릭했을때
+        $(".reviewbody>tr").click(function(){
+            if($(this).attr('vel') == 1){
+                $(this).next("tr").toggleClass("hide");
+            }
+        });
+        $(".dosometing").click(function(){
+            $(this).parents("tr").toggleClass("hide")
+            
+            console.log("클릭은했네?")
+        })
+    });
 
     function listing(test) {
     
@@ -71,12 +84,9 @@
                 
                 $("#reviewbody").empty();
                 for(let i = 0 ; i < test.length ; i++){
-                    console.log(test[i]["nickname"])
-                    console.log(test[i]["review"])
-                    console.log(test[i]["date"])
                     
-                    $("#reviewbody").append(`
-                    <tr>
+                    $("#reviewbody").append(`  
+                    <tr vel = "1">
                         <th>
                             ${i+1}
                         </th>
@@ -87,12 +97,45 @@
                             ${test[i]["review"]}
                         </th>
                     </tr>
+                    <tr class="hide" id = "1">
+                        <th colspan="3">
+                            <div class="jumbotron">
+                                <h4>${test[i]["morereview"]}</h2>
+                                <p>${test[i]["date"]}</p>
+                                <p><a class="btn btn-primary btn-lg dosometing" href="#" role="button">일단은 페이지 닫기로</a></p>
+                            </div>
+                        </th>
+                    </tr>
+
+
+
                     `)
                     
                 }
             }
         })
     }
+    function reviewone(test) {
+        console.log("이거왜만들엇냐.")
+        
+    }
+    function NoFuckplessNoNoNOOOOOOOO(test) {
+        
+        console.log($(test).attr('vel'))
+        console.log($(test).attr('vel2'))
+        $.ajax({
+            type: "POST",
+            url: "/albumdata/onereview",
+            data: { name : $(test).attr('vel2'),
+                    date : $(test).attr('vel2')          
+        },
+            success: function (response) {
+                test = response['msg']
+                console.log(test)
+            }
+        })
+    }
+   
 
 </script>
 <style>
@@ -100,6 +143,13 @@
         margin: auto;
         padding: auto;
         width: 85%;
+    }
+    #reviewbody{
+        cursor: pointer;
+
+    }
+    .hide{
+        display:none;
     }
 </style>
 
@@ -162,10 +212,10 @@
     </div>
 
 
-    <table class="table table-hover">
+    <table class="table table-hover" id = "test1">
         <thead>
             <tr>
-                <th>
+                <td>
                     번호
                 </th>
                 <th>
@@ -176,8 +226,8 @@
                 </th>
             </tr>
         </thead>
-        <tbody id = "reviewbody">
-            <tr>
+        <tbody id = "reviewbody" class="reviewbody">
+            <tr vel = "1">
                 <th>
                     서른마흔다섯번
                 </th>
@@ -188,9 +238,18 @@
                     으어 이페이지는 안되 돌아가 봐줄마음 없어
                 </th>
             </tr>
+            <tr class="hide" id = "1">
+                <th colspan="3">
+                    <div class="jumbotron">
+                        <h4>솔찍히 이노래 나한테는 별로인듯 .. ㄹㅇㅓㅏㅇㄴ러ㅏㅣㅁㄴ어리ㅏㅁㄴ어라ㅣㅁ넝라ㅣ멍니ㅏㄹ;ㅓㅁㄴ이ㅏ;럼ㄴ이ㅏ;럼나ㅣ;ㅇ럼ㅇㄴ;ㅣㅏ럼니;ㅏㅇ럼ㄴ아ㅣ;러ㅏㅣㅁㅇㄴ루ㅡ파ㅣㄴ오ㅜ퍼ㅏㅣㄴ우파ㅣ두ㅡ퍄누ㅠㅐㅑㄴㄹ우휴ㅑㅐㅜㄴ규ㅑㅜㄷ가ㅓㅎ;ㅗㄴ아ㅣ러홍나ㅣ러;ㅣㅁ낭러ㅏㅣㄴㅇ멀</h2>
+                        <p>2021.09.16</p>
+                        <p><a class="btn btn-primary btn-lg dosometing" href="#" role="button">일단은 페이지 닫기로</a></p>
+                    </div>
+                </th>
+            </tr>
         </tbody>
-
     </table>
+    
     <button type="button" class="btn btn-primary">리스트 돌아가기</button>
 
     <!-- 푸터 시작부분 -->
