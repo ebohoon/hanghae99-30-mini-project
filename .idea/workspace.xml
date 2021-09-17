@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
+<<<<<<< HEAD
+    <list default="true" id="f3c6efb5-57ff-47b6-a5f9-9f6bc1a4826a" name="변경" comment="sdf">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index.html" afterDir="false" />
+    </list>
+=======
     <list default="true" id="f3c6efb5-57ff-47b6-a5f9-9f6bc1a4826a" name="변경" comment="" />
+>>>>>>> master
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -10,7 +17,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="HTML File" />
+        <option value="Python Script" />
       </list>
     </option>
   </component>
@@ -26,12 +33,21 @@
               <option name="branches">
                 <list>
                   <RecentBranch>
+<<<<<<< HEAD
+                    <option name="branchName" value="beatrix" />
+                    <option name="lastUsedInstant" value="1631777358" />
+                  </RecentBranch>
+                  <RecentBranch>
+                    <option name="branchName" value="yumi_project" />
+                    <option name="lastUsedInstant" value="1631775260" />
+=======
                     <option name="branchName" value="master" />
                     <option name="lastUsedInstant" value="1631669745" />
                   </RecentBranch>
                   <RecentBranch>
                     <option name="branchName" value="beatrix" />
                     <option name="lastUsedInstant" value="1631600544" />
+>>>>>>> master
                   </RecentBranch>
                 </list>
               </option>
@@ -42,7 +58,7 @@
       </RecentBranches>
     </option>
   </component>
-  <component name="ProjectId" id="1y7CExDcRtkqC3vKoRorcgWu2jY" />
+  <component name="ProjectId" id="1yCMYAAJMxWjrKsWP31PGeWmdcV" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -52,11 +68,16 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../project04" />
   </component>
-  <component name="RunManager">
-    <configuration name="hanghae99-30-mini-project" type="PythonConfigurationType" factoryName="Python">
+<<<<<<< HEAD
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\이보훈\Desktop\sparta_plus\hanghae99-30-mini-project" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Python.crawling">
+    <configuration name="crawling" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="hanghae99-30-mini-project" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -64,12 +85,12 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/app.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/crawling.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -78,10 +99,77 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="doselenium" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="hanghae99-30-mini-project" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/doselenium.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="ds" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+=======
+  <component name="RunManager">
+    <configuration name="hanghae99-30-mini-project" type="PythonConfigurationType" factoryName="Python">
+>>>>>>> master
+      <module name="hanghae99-30-mini-project" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/templates" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/templates/ds.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+<<<<<<< HEAD
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.crawling" />
+        <item itemvalue="Python.ds" />
+        <item itemvalue="Python.doselenium" />
+      </list>
+    </recent_temporary>
+=======
+>>>>>>> master
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="애플리케이션 수준" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="디폴트 작업">
+<<<<<<< HEAD
+      <changelist id="f3c6efb5-57ff-47b6-a5f9-9f6bc1a4826a" name="변경" comment="sdf" />
+      <created>1631751250829</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1631751250829</updated>
+      <workItem from="1631751260341" duration="17371000" />
+      <workItem from="1631777304339" duration="148000" />
+=======
       <changelist id="6f038e5b-46a1-49e3-8087-9d454e40dc28" name="변경" comment="" />
       <created>1631593132336</created>
       <option name="number" value="Default" />
@@ -89,13 +177,14 @@
       <updated>1631593132336</updated>
       <workItem from="1631593136671" duration="4189000" />
       <workItem from="1631597662598" duration="315000" />
+>>>>>>> master
     </task>
     <task id="LOCAL-00001" summary="sdf">
-      <created>1631600287738</created>
+      <created>1631769054329</created>
       <option name="number" value="00001" />
       <option name="presentableId" value="LOCAL-00001" />
       <option name="project" value="LOCAL" />
-      <updated>1631600287738</updated>
+      <updated>1631769054330</updated>
     </task>
     <option name="localTasksCounter" value="2" />
     <servers />
@@ -108,6 +197,9 @@
       <map>
         <entry key="MAIN">
           <value>
+<<<<<<< HEAD
+            <State />
+=======
             <State>
               <option name="FILTERS">
                 <map>
@@ -121,6 +213,7 @@
                 </map>
               </option>
             </State>
+>>>>>>> master
           </value>
         </entry>
       </map>
@@ -131,4 +224,12 @@
     <MESSAGE value="sdf" />
     <option name="LAST_COMMIT_MESSAGE" value="sdf" />
   </component>
+<<<<<<< HEAD
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/hanghae99_30_mini_project$ds.coverage" NAME="ds 커버리지 결과" MODIFIED="1631764766814" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/templates" />
+    <SUITE FILE_PATH="coverage/hanghae99_30_mini_project$crawling.coverage" NAME="crawling 커버리지 결과" MODIFIED="1631772382560" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/hanghae99_30_mini_project$doselenium.coverage" NAME="doselenium 커버리지 결과" MODIFIED="1631730047552" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+  </component>
+=======
+>>>>>>> master
 </project>
