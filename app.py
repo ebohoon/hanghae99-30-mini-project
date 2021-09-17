@@ -2,6 +2,9 @@ from flask import Flask, render_template, jsonify, request, flash, session
 import jwt
 import hashlib
 
+import requests
+
+
 app = Flask(__name__)
 
 # 테스트 improt
@@ -79,12 +82,23 @@ def member_login():
 # 회원가입 페이지
 
 @app.route('/register')
-def sign_up():
+def sign_up_main():
     return render_template('register.html')
 
+@app.route('/check_dup_name', methods=['POST'])
+def check_dup_name():
+    username_receive = request.form['username_give']
+    exists = bool(db.users.find({"username": username_receive}))
+    return jsonify({'result': 'success', 'exists': exists})
+
+@app.route('/check_dup_id', methods=['POST'])
+def check_dup_id():
+    id_receive = request.form['id_give']
+    exists = bool(db.users.find_one({"id": id_receive}))
+    return jsonify({'result': 'success', 'exists': exists})
 
 @app.route('/sign_up/save', methods=['POST'])
-def sign_up_main():
+def sign_up():
     username_receive = request.form['username_give']
     password_receive = request.form['password_give']
     password_hash = hashlib.sha256(password_receive.encode('utf-8')).hexdigest()
@@ -97,7 +111,7 @@ def sign_up_main():
     db.users.insert_one(doc)
     return jsonify({'result': 'success'})
 
-
+#-----------------------------------------------------------------------------
 @app.route('/albumdata', methods=['GET'])
 def albumdata():
     sample_receive = request.args.get('sample_give')

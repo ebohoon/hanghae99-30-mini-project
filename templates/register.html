@@ -26,6 +26,83 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bs-custom-file-input/dist/bs-custom-file-input.js"></script>
 
+    <script>
+
+        {#아이디, 비밀번호#}
+        {#정규표현식#}
+
+
+        function is_nickname(asValue) {
+            var regExp = /^(?=.*[a-zA-Z])[-a-zA-Z0-9_.]{2,10}$/;
+            return regExp.test(asValue);
+        }
+
+        function is_password(asValue) {
+            var regExp = /^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z!@#$%^&*]{8,20}$/;
+            return regExp.test(asValue);
+        }
+
+        {##아이디#}
+        {#중복확인#}
+        {#클라이언트#}
+
+        function check_dup_name() {
+            let username = $("#input-username").val()
+            console.log(username)
+
+            if (username == "") {
+                alert('닉네임을 입력하세요')
+            }
+
+            if (!is_nickname(username)) {
+                alert('닉네임의 형식을 확인해주세요. 영문과 숫자, 일부 특수문자(._-) 사용 가능. 2-10자 길이')
+            }
+
+            $.ajax({
+                type: "POST",
+                url: "/check_dup_name",
+                data: {
+                    username_give: username
+                },
+                success: function (response) {
+
+                    if (response["exists"]) {
+                        alert('이미 존재하는 닉네임입니다')
+                    } else {
+                        alert('사용할 수 있는 닉네임입니다')
+                    }
+
+
+                }
+            });
+        }
+
+        function check_dup_id() {
+            let id = $("#input-id").val()
+            if (id == "") {
+                alert('아이디를 입력하세요')
+            }
+            $.ajax({
+                type: "POST",
+                url: "/check_dup_id",
+                data: {
+                    id_give: id
+                },
+                success: function (response) {
+
+                    if (response["exists"]) {
+                        alert('이미 존재하는 아이디입니다')
+                    } else {
+                        alert('사용할 수 있는 아이디입니다')
+                    }
+
+
+                }
+            });
+        }
+
+    </script>
+
 </head>
 <body>
 <div class="all">
@@ -44,17 +121,17 @@
                 <div class="form">
                     <label for="colFormLabel" class="label">닉네임</label>
                     <div class="col-sm-10">
-                        <input type="email" class="form-control" id="colFormLabel" placeholder="">
+                        <input type="email" class="form-control" id="colFormLabel input-username" placeholder="">
                         <span><button style="color:purple;border-color:purple; margin-top:15px;" type="button"
-                                      class="btn btn-outline-primary">중복확인</button></span>
+                                      class="btn btn-outline-primary" onclick ="check_dup_name()">중복확인</button></span>
                     </div>
                 </div>
                 <div class="form">
                     <label for="colFormLabel" class="label">아이디</label>
                     <div class="col-sm-10">
-                        <input type="email" class="form-control" id="colFormLabel" placeholder="">
+                        <input type="email" class="form-control" id="colFormLabel input-id" placeholder="">
                         <span><button style="color:purple; border-color:purple; margin-top:15px;" type="button"
-                                      class="btn btn-outline-primary">중복확인</button></span>
+                                      class="btn btn-outline-primary" onclick ="check_dup_id()">중복확인</button></span>
                     </div>
                 </div>
                 <div class="form">
@@ -73,7 +150,8 @@
                         class="btn-primary btn-lg">가입하기
                 </button>
                 <button style="background-color:rebeccapurple; border-color:rebeccapurple" type="button" id="button"
-                        class="btn-primary btn-lg"><a style="text-align:center; color:white;" href="/login.html">로그인 화면으로 돌아가기</a>
+                        class="btn-primary btn-lg"><a style="text-align:center; color:white;" href="/login.html">로그인
+                    화면으로 돌아가기</a>
                 </button>
 
             </div>
@@ -85,3 +163,5 @@
 </div>
 </body>
 </html>
+
+
