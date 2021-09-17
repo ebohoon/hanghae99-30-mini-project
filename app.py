@@ -158,13 +158,14 @@ def reviewWrite():
     detailReview_receive = request.form['detailReview_give']
     now = datetime.datetime.now()
     nowDate = now.strftime('%Y.%m.%d')
+    titlename = request.form['title']
     doc = {
         'nickname': name_receive,               # 유저
         'review': oneReview_receive,          # 한줄평
         'rete': rate_receive,                 # 평가
         'date': nowDate,  # 리뷰 날짜
         'morereview': detailReview_receive,   # 상세리뷰
-        'albumtitle': "Butter"                  #댓글에 해당하는 엘범
+        'albumtitle': titlename                 #댓글에 해당하는 엘범
     }
     
     db.review.insert_one(doc)

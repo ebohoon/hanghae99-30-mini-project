@@ -28,26 +28,14 @@
 
 <script>
     function reviewWrite() {
-        let name = $('#name').val()
+        let name = $('#name').text()
         let oneReview = $('#oneReview').val()
-        let rate = $('#rate').val()
+        let rate = $('#rate').text()
         let detailReview = $('#detailReview').val()
+        let titlename = $('#titlename').text()
 
-        $.ajax({
-            type: "POST",
-            url: "/write",
-            data: {
-                name_give: name,
-                oneReview_give: oneReview,
-                rate_give: rate,
-                detailReview_give: detailReview
-            },
-            success: function (response) {
-                alert(response['msg'])
-                console.log(oneReview)
-                window.location.href = '/albumdata'
-            }
-        });
+        console.log(name, oneReview, rate, detailReview, titlename)
+        
     }
 
     // function reviewDelete() {
@@ -145,31 +133,6 @@
                 </table>
             </div>
         </div>
-</section>
-
-<section>
-    <div class="review-table">
-    <p>작성자</p>
-    <p id="name">{nickname} </p>
-    <p>
-    <div class="form-inline">
-        <div class="form-group">
-            <label for="inputPassword6">한줄평</label>
-            <input type="text" id="oneReview" class="form-control mx-sm-3" aria-describedby="passwordHelpInline"
-                   placeholder="60자 이내로 써주세요!">
-        </div>
-    </div>
-    </p>
-    <p id="rate">평점 {여기에 별표 와야함}</p>
-    <div>
-        <div class="form-group">
-        <textarea class="form-control" id="detailReview" placeholder="더 자세한 이야기를 써주세요!"
-                  rows="3"></textarea>
-        </div>
-    </div>
-
-    <button onclick="reviewWrite()" type="button" class="btn btn-primary">등록하기</button>
-</div>
 </section>
 
 
