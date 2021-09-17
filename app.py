@@ -98,11 +98,11 @@ def reviewWrite():
     return jsonify({'msg': '리뷰를 작성했습니다!'})
 
 # 앨범리뷰삭제 API
-@app.route('/delete', methods=['POST'])
-def reviewDelete():
-    name_receive = request.form['name_give']
-    db.review.delete_one({'name': name_receive})
-    return jsonify({'msg': '삭제한 내용은 다시 되돌릴 수 없습니다. 그래도 삭제 하시겠습니까?'})
+# @app.route('/delete', methods=['POST'])
+# def reviewDelete():
+#     name_receive = request.form['name_give']
+#     db.review.delete_one({'name': name_receive})
+#     return jsonify({'msg': '삭제한 내용은 다시 되돌릴 수 없습니다. 그래도 삭제 하시겠습니까?'})
 
 # 앨범리스트 API
 @app.route('/listing', methods=['GET'])

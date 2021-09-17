@@ -38,32 +38,33 @@
             url: "/write",
             data: {
                 name_give: name,
-                oneReview_receive: oneReview,
-                rate_receive: rate,
-                detailReview_receive: detailReview
+                oneReview_give: oneReview,
+                rate_give: rate,
+                detailReview_give: detailReview
             },
             success: function (response) {
                 alert(response['msg'])
+                console.log(oneReview)
                 window.location.href = '/albumdata'
             }
         });
     }
 
-    function reviewDelete() {
-        $.ajax({
-            type: "POST",
-            url: "/delete",
-            data: {name_give: name},
-            success: function (response) {
-                alert(response['msg'])
-                window.location.href = '/albumdata'
-            }
-        });
-    }
+    // function reviewDelete() {
+    //     $.ajax({
+    //         type: "POST",
+    //         url: "/delete",
+    //         data: {name_give: name},
+    //         success: function (response) {
+    //             alert(response['msg'])
+    //             window.location.href = '/albumdata'
+    //         }
+    //     });
+    // }
 </script>
 
 <style>
-    #test {
+    #oneReview {
         width: 800px;
     }
 
@@ -152,8 +153,8 @@
     <p>
     <div class="form-inline">
         <div class="form-group">
-            <label for="inputPassword6" id="oneReview">한줄평</label>
-            <input type="text" id="test" class="form-control mx-sm-3" aria-describedby="passwordHelpInline"
+            <label for="inputPassword6">한줄평</label>
+            <input type="text" id="oneReview" class="form-control mx-sm-3" aria-describedby="passwordHelpInline"
                    placeholder="60자 이내로 써주세요!">
         </div>
     </div>
@@ -167,7 +168,6 @@
     </div>
 
     <button onclick="reviewWrite()" type="button" class="btn btn-primary">등록하기</button>
-    <button onclick="reviewDelete()" type="button" class="btn btn-primary">삭제하기</button>
 </div>
 </section>
 
