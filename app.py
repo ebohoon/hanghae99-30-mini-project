@@ -3,6 +3,9 @@ import jwt
 import hashlib
 import datetime
 
+import requests
+
+
 app = Flask(__name__)
 
 # 테스트 improt
@@ -25,15 +28,16 @@ app.config['SESSION_TYPE'] = 'filesystem'
 app.secret_key = '이걸보다니.. 대단한걸?'
 
 
-@app.route('/')
-def home():
-    return render_template('index.html')
+# @app.route('/')
+# def home():
+#     return render_template('index.html')
 
 
 ##해더
 @app.route('/header')
 def header():
-    return render_template('header.html')
+    userid = session.get('logged_in')
+    return render_template('header.html',userid=userid)
 
 
 ##푸터
@@ -48,60 +52,88 @@ def login():
     return render_template('login.html')
 
 
-@app.route('/login_main', methods=['GET', 'POST'])
-def member_login():
+@app.route('/', methods=['GET', 'POST'])
+def home():
     if request.method == 'GET':
-        return render_template('login.html')
+        if session.get('logged_in'):
+            userid = session.get('logged_in')
+            return render_template('albumlist.html', userid=userid)
+        
+        return render_template('index.html')
     elif request.method == 'POST':
         userid = request.form.get("userid", type=str)
         pw = request.form.get("userPW", type=str)
 
         if userid == "":
             flash("아이디를 입력하세요")
-            return render_template('login.html')
+            return render_template('index.html')
         elif pw == "":
             flash("비밀번호를 입력하세요")
-            return render_template('login.html')
+            return render_template('index.html')
         else:
             users = db.users
-            id_check = users.find_one({"userid": userid})
-            # print(id_check["pw"])
-            # print(generate_password_hash(pw))
+            id_check = users.find_one({"id": userid})
+            hapw = hashlib.sha256(pw.encode('utf-8')).hexdigest()
+            
             if id_check is None:
                 flash("아이디가 존재하지 않습니다.")
-                return render_template('login.html')
-            elif id_check["pw"] == pw:
+                return render_template('index.html')
+            elif id_check["password"] == hapw:
                 session["logged_in"] = userid
-                return render_template('index.html', userid=userid)
+                return render_template('albumlist.html', userid=userid)
             else:
                 flash("비밀번호가 틀렸습니다.")
-                return render_template('login.html')
+                return render_template('index.html')
+#로그아웃
+@app.route("/logout", methods=["GET"])
+def logout():
+    session.pop('logged_in',None)
+    return render_template('index.html')
+
+
+
 
 # 회원가입 페이지
 
 @app.route('/register')
-def sign_up():
+def sign_up_main():
     return render_template('register.html')
 
+@app.route('/check_dup_name', methods=['POST'])
+def check_dup_name():
+    username_receive = request.form['username_give']
+    exists = bool(db.users.find_one({"username": username_receive}))
+    print(exists)
+    return jsonify({'result': 'success', 'exists': exists})
+
+@app.route('/check_dup_id', methods=['POST'])
+def check_dup_id():
+    id_receive = request.form['id_give']
+    exists = bool(db.users.find_one({"id": id_receive}))
+    return jsonify({'result': 'success', 'exists': exists})
 @app.route('/dododo')
 def what():
     return render_template('prac.html')
 
 @app.route('/sign_up/save', methods=['POST'])
-def sign_up_main():
+def sign_up():
     username_receive = request.form['username_give']
     password_receive = request.form['password_give']
+    id_receive = request.form['id_give']
     password_hash = hashlib.sha256(password_receive.encode('utf-8')).hexdigest()
     doc = {
         "username": username_receive,  # 아이디
         "password": password_hash,  # 비밀번호
-        "profile_name": username_receive,  # 프로필 이름 기본값은 아이디
+        "id": id_receive,  # 프로필 이름 기본값은 아이디
 
     }
     db.users.insert_one(doc)
     return jsonify({'result': 'success'})
 
 
+
+
+#-----------------------------------------------------------------------------
 @app.route('/albumdata', methods=['GET'])
 def albumdata():
     sample_receive = request.args.get('sample_give')
@@ -111,7 +143,8 @@ def albumdata():
         sample_receive = request.args.get('sample_give')
         print(sample_receive)
         data = sample_receive
-        return render_template('albumdata.html', msg="일단 연결은 되네", data=data)
+        userid = session.get('logged_in')
+        return render_template('albumdata.html', msg="일단 연결은 되네", data=data ,userid =userid)
 
 
 @app.route('/albumdata/find', methods=['POST'])
@@ -158,13 +191,14 @@ def reviewWrite():
     detailReview_receive = request.form['detailReview_give']
     now = datetime.datetime.now()
     nowDate = now.strftime('%Y.%m.%d')
+    titlename = request.form['title']
     doc = {
         'nickname': name_receive,               # 유저
         'review': oneReview_receive,          # 한줄평
         'rete': rate_receive,                 # 평가
         'date': nowDate,  # 리뷰 날짜
         'morereview': detailReview_receive,   # 상세리뷰
-        'albumtitle': "Butter"                  #댓글에 해당하는 엘범
+        'albumtitle': titlename                 #댓글에 해당하는 엘범
     }
     
     db.review.insert_one(doc)

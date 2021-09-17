@@ -7,7 +7,7 @@ import re
 client = MongoClient('localhost', 27017)
 db = client.LYAlbum
 
-driver = webdriver.Chrome('./chromedriver')  # 드라이버를 실행합니다.
+driver = webdriver.Chrome('D:/selenium/chromedriver_win32/chromedriver')  # 드라이버를 실행합니다.
 
 url = "https://www.melon.com/search/total/index.htm?q=bts&section=&mwkLogType=T"
 # headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36'}
@@ -62,7 +62,7 @@ def crawling():
         singlist = []
         a1 = []
         b1 = []
-        for te in song[0::2]:
+        for te in songs[0::2]:
             title = te.text.strip().replace('\n', '.')
             a1.append(title)
             # print(title)
@@ -90,16 +90,17 @@ def crawling():
         # test 프린트
         # print(title, artist, date, genre, Publisher, agency, img)
         doc = {
-            'title': title,
+            'albumtitle': title,
             'artist': artist,
             'date': date,
             'genre': genre,
-            'Publisher': Publisher,
+            'publisher': Publisher,
             'agency': agency,
-            'img': img
+            'albumimage': img,
+            'singlist' : singlist
         }
         print(doc)
-        db.album1.insert_one(doc)
+        db.album.insert_one(doc)
         driver.back()
 
 page = 2
