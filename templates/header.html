@@ -11,7 +11,7 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
     <!--Font CSS-->
 
@@ -27,8 +27,8 @@
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-            crossorigin="anonymous"></script>
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
 
 
     <!-- Bulma -->
@@ -36,7 +36,6 @@
 
     <!-- Custom CSS -->
     <style>
-
         .jumbotron-fluid {
 
             background-color: mediumpurple;
@@ -51,7 +50,7 @@
             margin: auto !;
             padding-top: 1px;
             font-family: 'Comfortaa', cursive;
-            !important;
+             !important;
         }
 
         .lead {
@@ -59,18 +58,17 @@
             margin: 500px;
             color: aliceblue;
             text-align: center;
-            font-family: 'Comfortaa', cursive;!important;
+            font-family: 'Comfortaa', cursive;
+             !important;
         }
 
 
-        .wrapper{
+        .wrapper {
             float: right;
             margin-bottom: 70px !important;
             margin-right: 20px;
             display: block;
         }
-
-
     </style>
 
 
@@ -82,21 +80,27 @@
 
 
 
-    <div class="wrapper">
-        <div class="head-side">
-            <div class="btn-group-toggle" data-toggle="buttons">
+            <div class="wrapper">
+                <div class="head-side">
+                    <div class="btn-group-toggle" data-toggle="buttons">
 
-                    Nickname 아미님!
-                <label class="btn btn-secondary active">
-                    <input type="checkbox" checked autocomplete="off">
-                        Logout
-                </label>
+                        {%if userid%}
+                        Nickname {{userid}}님
+                        <label class="btn btn-secondary active" onclick="location.href='/logout'">
+                            <input type="checkbox" checked autocomplete="off">
+                            Logout
+                        </label>
+                        {%else%}
+                        <label class="btn btn-secondary active" onclick="location.href='/logout'">
+                            로그인페이지로!
+                        </label>
+                        {%endif%}
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
-</body>
+            </body>
 
 
-</body>
+            </body>
 
 </html>
