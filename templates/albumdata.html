@@ -48,6 +48,12 @@
             $(this).next("tr").toggleClass("hide");
         }
     });
+    $(document).on("click", ".dosometing", function() {
+        if($(this).attr('vel') == 1){
+            $(this).parents("tr").toggleClass("hide")
+        }
+    });
+    
 
     
     var mapping = "{{ data }}";
