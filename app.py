@@ -160,6 +160,7 @@ def reviewWrite():
         'detailReview': detailReview_receive   # 상세리뷰
     }
     db.review.insert_one(doc)
+    return jsonify({'msg': '리뷰를 작성했습니다!'})
 
 # 앨범리스트 API
 @app.route('/listing', methods=['GET'])
@@ -169,25 +170,22 @@ def listing():
 
 
 
-# 엘범 정보 크롤링 만들예정인 공간
-@app.route('/temptestdo', methods=["GET"])
-def 크롤링():
-    # testlist = [("test","testdo"),("test2","testdo2")]
-
-    doc = {
-        'albumtitle': "Butter",  ## 앨범 타이틀
-        'albumimage': "https://cdnimg.melon.co.kr/cm2/album/images/106/95/099/10695099_20210827102823_500.jpg?d999c8c02eeb31ea881ea04dca7c4ae8/melon/resize/282/quality/80/optimize",
-        ## 앨범 이미지
-        'artist': "방탄",  ## 가수명
-        'date': "2021.09.15",  ## 앨범 발매일
-        'genre': "랩",  ## 앨범 장르
-        'agency': "카카오",  ## 앨범 기획사
-        'publisher': "어딜까",  ## 앨범 발매사
-        'singlist': 'testlist'  ## 앨범 곡리스트
-    }
-
-    db.review.insert_one(doc)
-    return jsonify({'msg': '리뷰를 작성했습니다!'})
+# # 엘범 정보 크롤링 만들예정인 공간
+# @app.route('/temptestdo', methods=["GET"])
+# def 크롤링():
+#     # testlist = [("test","testdo"),("test2","testdo2")]
+#
+#     doc = {
+#         'albumtitle': "Butter",  ## 앨범 타이틀
+#         'albumimage': "https://cdnimg.melon.co.kr/cm2/album/images/106/95/099/10695099_20210827102823_500.jpg?d999c8c02eeb31ea881ea04dca7c4ae8/melon/resize/282/quality/80/optimize",
+#         ## 앨범 이미지
+#         'artist': "방탄",  ## 가수명
+#         'date': "2021.09.15",  ## 앨범 발매일
+#         'genre': "랩",  ## 앨범 장르
+#         'agency': "카카오",  ## 앨범 기획사
+#         'publisher': "어딜까",  ## 앨범 발매사
+#         'singlist': 'testlist'  ## 앨범 곡리스트
+#     }
 
 # 앨범리뷰삭제 API
 # @app.route('/delete', methods=['POST'])
