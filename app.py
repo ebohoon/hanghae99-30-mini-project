@@ -117,6 +117,7 @@ def albumdata():
 def find_alumdatalist():
     titlere = request.form['sample_give']
     albumliset = list(db.album.find({"albumtitle": titlere}, {'_id': False}))
+    print(albumliset)
 
     return jsonify({'msg': albumliset})
 
@@ -143,22 +144,81 @@ def find_reviewone():
 def albumlist():
     return render_template('albumlist.html')
 
+@app.route('/albumreview')
+def albumreview():
+    return render_template('albumreview.html')
 
+# 앨범리뷰쓰기 API
+@app.route('/write', methods=['POST'])
+def reviewWrite():
+    name_receive = request.form['name_give']
+    oneReview_receive = request.form['oneReview_give']
+    rate_receive = request.form['rate_give']
+    detailReview_receive = request.form['detailReview_give']
+
+    doc = {
+        'name': name_receive,               # 유저
+        'oneReview': oneReview_receive,          # 한줄평
+        'rate': rate_receive,                 # 평가
+        'detailReview': detailReview_receive   # 상세리뷰
+    }
+    db.review.insert_one(doc)
+    return jsonify({'msg': '리뷰를 작성했습니다!'})
+
+# 앨범리스트 API
 @app.route('/listing', methods=['GET'])
 def listing():
     album = list(db.album.find({}, {'_id': False}))
     return jsonify({'album': album})
 
 
+
+# # 엘범 정보 크롤링 만들예정인 공간
+# @app.route('/temptestdo', methods=["GET"])
+# def 크롤링():
+#     # testlist = [("test","testdo"),("test2","testdo2")]
+#
+#     doc = {
+#         'albumtitle': "Butter",  ## 앨범 타이틀
+#         'albumimage': "https://cdnimg.melon.co.kr/cm2/album/images/106/95/099/10695099_20210827102823_500.jpg?d999c8c02eeb31ea881ea04dca7c4ae8/melon/resize/282/quality/80/optimize",
+#         ## 앨범 이미지
+#         'artist': "방탄",  ## 가수명
+#         'date': "2021.09.15",  ## 앨범 발매일
+#         'genre': "랩",  ## 앨범 장르
+#         'agency': "카카오",  ## 앨범 기획사
+#         'publisher': "어딜까",  ## 앨범 발매사
+#         'singlist': 'testlist'  ## 앨범 곡리스트
+#     }
+
+# 앨범리뷰삭제 API
+# @app.route('/delete', methods=['POST'])
+# def reviewDelete():
+#     name_receive = request.form['name_give']
+#     db.review.delete_one({'name': name_receive})
+#     return jsonify({'msg': '삭제한 내용은 다시 되돌릴 수 없습니다. 그래도 삭제 하시겠습니까?'})
+
+
+# 앨범리스트 리뷰 보기 API
+@app.route('/review', methods=['GET'])
+def show_review():
+    sample_receive = request.args.get('sample_give')
+    print(sample_receive)
+    return jsonify({'msg': '리뷰를 보러 가볼까요?'})
+
+# 앨범리스트 리뷰 작성 API
+@app.route('/review', methods=['POST'])
+def make_review():
+    return jsonify({'msg': '리뷰를 쓰러 가볼까요?'})
+
+
 # 엘범 정보 크롤링 만들예정인 공간
-@app.route('/temptestdo', methods=["GET"])
+@app.route('/temptestdo', methods=["GET", "POST"])
 def 크롤링():
     testlist = [("test","testdo"),("test2","testdo2")]
 
     doc = {
         'albumtitle': "Butter",  ## 앨범 타이틀
-        'albumimage': "https://cdnimg.melon.co.kr/cm2/album/images/106/95/099/10695099_20210827102823_500.jpg?d999c8c02eeb31ea881ea04dca7c4ae8/melon/resize/282/quality/80/optimize",
-        ## 앨범 이미지
+        'albumimage': "http://sdfsdj",  ## 앨범 이미지
         'artist': "방탄",  ## 가수명
         'date': "2021.09.15",  ## 앨범 발매일
         'genre': "랩",  ## 앨범 장르
@@ -172,18 +232,6 @@ def 크롤링():
     return render_template('index.html')
 
 
-@app.route('/review', methods=['GET'])
-def show_review():
-    sample_receive = request.args.get('sample_give')
-    print(sample_receive)
-    return jsonify({'msg': 'GET 연결 완료!'})
-
-
-@app.route('/review', methods=['POST'])
-def make_review():
-    return jsonify({'msg': 'POST 요청 완료!'})
-
-
 ## 리뷰 더미데이터 생성
 @app.route('/temptestdo11', methods=["GET", "POST"])
 def 리뷰더미데이터():
@@ -191,6 +239,7 @@ def 리뷰더미데이터():
         'review': "BTS최고다!",  # 한줄평
         'nickname': "도도",  # 닉네임
         'rete': "3",  # 별점
+        'date': "2021.09.15",  # 리뷰 날짜
         'date': "2021.09.11",  # 리뷰 날짜
         'morereview': "랩",  # 리뷰
         'albumtitle': "Butter"  # 해당 엘범타이틀
