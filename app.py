@@ -150,7 +150,7 @@ def listing():
 # 엘범 정보 크롤링 만들예정인 공간
 @app.route('/temptestdo', methods=["GET"])
 def 크롤링():
-    # testlist = [("test","testdo"),("test2","testdo2")]
+    testlist = [("test","testdo"),("test2","testdo2")]
 
     doc = {
         'albumtitle': "Butter",  ## 앨범 타이틀
