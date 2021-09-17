@@ -33,9 +33,12 @@
     <h1 class="head">MY BTS PLAYLIST
     <div class="head-side">
         <div class="btn-group-toggle" data-toggle="buttons">
-            Nickname 아미님!
-          <label class="btn btn-secondary active">
-              <input type="checkbox" checked autocomplete="off">
+            {%if userid%}
+            Nickname {{userid}}님
+            {%else%}
+            너뭐야 당장나가
+            {%endif%}
+            <label class="btn btn-secondary active" onclick="location.href='/logout'">
               Logout
           </label>
         </div>

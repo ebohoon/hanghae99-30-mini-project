@@ -28,15 +28,16 @@ app.config['SESSION_TYPE'] = 'filesystem'
 app.secret_key = '이걸보다니.. 대단한걸?'
 
 
-@app.route('/')
-def home():
-    return render_template('index.html')
+# @app.route('/')
+# def home():
+#     return render_template('index.html')
 
 
 ##해더
 @app.route('/header')
 def header():
-    return render_template('header.html')
+    userid = session.get('logged_in')
+    return render_template('header.html',userid=userid)
 
 
 ##푸터
@@ -51,34 +52,48 @@ def login():
     return render_template('login.html')
 
 
-@app.route('/login_main', methods=['GET', 'POST'])
-def member_login():
+@app.route('/', methods=['GET', 'POST'])
+def home():
     if request.method == 'GET':
-        return render_template('login.html')
+        if session.get('logged_in'):
+            userid = session.get('logged_in')
+            return render_template('albumlist.html', userid=userid)
+        
+        return render_template('index.html')
     elif request.method == 'POST':
         userid = request.form.get("userid", type=str)
         pw = request.form.get("userPW", type=str)
 
         if userid == "":
             flash("아이디를 입력하세요")
-            return render_template('login.html')
+            return render_template('index.html')
         elif pw == "":
             flash("비밀번호를 입력하세요")
-            return render_template('login.html')
+            return render_template('index.html')
         else:
             users = db.users
-            id_check = users.find_one({"userid": userid})
-            # print(id_check["pw"])
-            # print(generate_password_hash(pw))
+            id_check = users.find_one({"id": userid})
+            hapw = hashlib.sha256(pw.encode('utf-8')).hexdigest()
+            
+            print(hapw)
+            print(id_check["password"])
             if id_check is None:
                 flash("아이디가 존재하지 않습니다.")
-                return render_template('login.html')
-            elif id_check["pw"] == pw:
+                return render_template('index.html')
+            elif id_check["password"] == hapw:
                 session["logged_in"] = userid
-                return render_template('index.html', userid=userid)
+                return render_template('albumlist.html', userid=userid)
             else:
                 flash("비밀번호가 틀렸습니다.")
-                return render_template('login.html')
+                return render_template('index.html')
+#로그아웃
+@app.route("/logout", methods=["GET"])
+def logout():
+    session.pop('logged_in',None)
+    return render_template('index.html')
+
+
+
 
 # 회원가입 페이지
 
@@ -130,7 +145,8 @@ def albumdata():
         sample_receive = request.args.get('sample_give')
         print(sample_receive)
         data = sample_receive
-        return render_template('albumdata.html', msg="일단 연결은 되네", data=data)
+        userid = session.get('logged_in')
+        return render_template('albumdata.html', msg="일단 연결은 되네", data=data ,userid =userid)
 
 
 @app.route('/albumdata/find', methods=['POST'])
