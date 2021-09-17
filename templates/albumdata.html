@@ -79,12 +79,13 @@
                 $("#genre").html(`${test[0]["genre"]}`)
                 $("#publisher").html(`${test[0]["publisher"]}`)
                 $("#agency").html(`${test[0]["agency"]}`)
+                document.getElementById("titleimg").src= test[0]["albumimage"]
                 $("#singtolist").empty()
                 for(let i = 0 ; i < test[0]["singlist"].length ; i++){
                     $("#singtolist").append(`
                     <tr>
                         <th>
-                            <a href="${test[0]["singlist"][i][0]}">${test[0]["singlist"][i][1]}</a>
+                            <a href="https://www.melon.com/song/detail.htm?songId= ${test[0]["singlist"][i][1]}">${test[0]["singlist"][i][0]}</a>
                         </th>
                     </tr>
                     `)
@@ -213,7 +214,7 @@
   
     <div class="row">
         <div class="col">
-            <img class="testimg"
+            <img class="testimg" id = "titleimg"
                 src="https://cdnimg.melon.co.kr/cm/album/images/102/73/641/10273641_500.jpg?931a1f4b6e6c90752585d656e86f0842/melon/resize/282/quality/80/optimize"
                 alt="여기에 이미지 있어요!!">
         </div>
