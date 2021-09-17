@@ -33,21 +33,26 @@
         let rate = $('#rate').val()
         let detailReview = $('#detailReview').val()
 
-        $.ajax({
-            type: "POST",
-            url: "/write",
-            data: {
-                name_give: name,
-                oneReview_give: oneReview,
-                rate_give: rate,
-                detailReview_give: detailReview
-            },
-            success: function (response) {
-                alert(response['msg'])
-                console.log(oneReview)
-                window.location.href = '/albumdata'
+        if ((oneReview == '') || (detailReview == '')) {
+            return alert('내용을 입력해주세요')
             }
-        });
+            else {
+            $.ajax({
+                type: "POST",
+                url: "/write",
+                data: {
+                    name_give: name,
+                    oneReview_give: oneReview,
+                    rate_give: rate,
+                    detailReview_give: detailReview
+                },
+                success: function (response) {
+
+                    alert(response['msg'])
+                    window.location.href = '/albumdata'
+                }
+            });
+        }
     }
 
     // function reviewDelete() {
