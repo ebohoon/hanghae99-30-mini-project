@@ -4,10 +4,16 @@ from selenium import webdriver
 from time import sleep
 import re
 
-client = MongoClient('localhost', 27017)
+
+
+
+client = MongoClient('3.36.71.96', 27017, username="test", password="test")
 db = client.LYAlbum
 
-driver = webdriver.Chrome('D:/selenium/chromedriver_win32/chromedriver')  # 드라이버를 실행합니다.
+driver = webdriver.Chrome('./chromedriver.exe')
+
+
+# 드라이버를 실행합니다.
 
 url = "https://www.melon.com/search/total/index.htm?q=bts&section=&mwkLogType=T"
 # headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36'}
