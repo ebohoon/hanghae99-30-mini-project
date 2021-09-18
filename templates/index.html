@@ -7,13 +7,12 @@
 {% endwith %}
 
 
-
 <!DOCTYPE html>
 <html lang="ko">
 
 <head>
     <!-- Webpage Title -->
-    <title>love Your Alblum</title>
+    <title>Yout BTS Playlist</title>
 
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -21,61 +20,82 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
 
     <!-- Optional JavaScript -->
+
+
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-        crossorigin="anonymous"></script>
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-        crossorigin="anonymous"></script>
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
 
 
     <!-- Bulma -->
 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+
+    <!-- Font -->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@200;400&display=swap" rel="stylesheet">
+
+    <!-- common.js부분 참조 -->
 
     <!-- Custom CSS -->
     <style>
-        .jumbotron-fluid {
 
-            background-color: mediumpurple;
-            height: 200px;
-        }
-
-        .display-4 {
-
-            font-weight: bold;
-            color: aliceblue;
-            text-align: center;
-            margin: auto;
-
-        }
-
-        .lead {
-            color: aliceblue;
-            text-align: center;
-
-        }
 
         .if_not_registered_yet {
 
-            font-size: 18px;
+            font-size: 16px;
             text-align: center;
+            margin-bottom: 5px;
         }
 
         .login-area {
 
             width: 600px;
             margin: auto;
-            ;
+            margin-top: 45px;
+            border-color: lightgray;
+            border: solid;
+            border-width: 1px;
+            padding: 20px;
+            border-radius: 5px;;
 
         }
+
+        .btn-primary{
+
+            background-color: lightgrey !important;
+            border-color: lightgray !important;
+        }
+
+
+        .btn-primary:hover, .btn-primary:active, .btn-primary:focus {
+
+            background-color: gray !important;
+            border-color: lightgray !important;
+        }
+
+
+        * {
+            font-family: 'IBM Plex Sans KR', sans-serif;
+        }
+
+
     </style>
 
+
+    <script src="../static/js/common.js"></script>
 
     <script>
         //에헿
@@ -85,54 +105,57 @@
 
 <body>
 
-    <!-- 상단 타이틀 -->
-    <section class="top-area">
-        <div class="jumbotron jumbotron-fluid">
-            <div class="container">
-                <h1 class="display-4">Love Your Album</h1>
-                <p class="lead">아미들 모두 모여라 어쩌구 저쩌구 </p>
+<!-- 해더 시작부분 -->
+<header w3-include-html="header" class="head"></header>
+
+
+<!-- 로그인 박스 -->
+<div class="">
+    <article>
+        <form method="post" action="/" class="login-area">
+            <!-- 아이디 -->
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="아이디" aria-label="uer_id"
+                       aria-describedby="basic-addon1" name="userid">
             </div>
-        </div>
-    </section>
 
-    <!-- 로그인 박스 -->
-    <div class=" ">
-        <article>
-            <form method="post" action="/" class="login-area">
-                <!-- 아이디 -->
-                <div class="input-group mb-3">
-                    <input type="text" class="form-control" placeholder="아이디" aria-label="uer_id"
-                        aria-describedby="basic-addon1" name="userid">
-                </div>
+            <!-- 비밀번호 -->
+            <div class="input-group mb-3">
+                <input type="password" class="form-control" placeholder="패스워드" aria-label="password"
+                       aria-describedby="basic-addon1" name="userPW">
+            </div>
 
-                <!-- 비밀번호 -->
-                <div class="input-group mb-3">
-                    <input type="password" class="form-control" placeholder="패스워드" aria-label="password"
-                        aria-describedby="basic-addon1" name="userPW">
-                </div>
+            <!-- 로그인 버튼 -->
+            <div class=" ">
+                <button type="submit" class="btn btn-primary btn-lg btn-block">로그인</button>
+            </div>
 
-                <!-- 로그인 버튼 -->
-                <div class=" ">
-                    <button type="submit" class="btn btn-primary btn-lg btn-block">로그인</button>
-                </div>
+            <!-- 구분선 -->
+            <hr>
 
-                <!-- 구분선 -->
-                <hr>
-
-                <!-- 회원가입 -->
-                <h4 class="if_not_registered_yet">아직 회원이 아니라면</h4>
-                <div class=" ">
-                    <button type="button" class="btn btn-primary btn-lg btn-block" onclick="location.href='/register'" >회원가입하기</button>
+            <!-- 회원가입 -->
+            <h4 class="if_not_registered_yet">아직 회원이 아니라면</h4>
+            <div class=" ">
+                <button type="button" class="btn btn-primary btn-lg btn-block" onclick="location.href='/register'" >회원가입하기</button>
                 </div>
 
             </form>
 
-        </article>
-    </div>
-    <!-- End of 로그인 박스 -->
+            </div>
 
-    </div>
-    </section>
+        </form>
 
+    </article>
+</div>
+<!-- End of 로그인 박스 -->
+
+</div>
+</section>
+
+<script>
+    includeHTML();
+</script>
+
+</body>
 
 </html>

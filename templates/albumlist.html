@@ -28,7 +28,8 @@
 
     <style>
         .btn-primary {
-            margin: auto 17px auto 17px;
+            margin: auto;
+
         }
 
         .date {
@@ -43,6 +44,7 @@
         .col-md-1 {
             margin-left: 15%;
         }
+
 
     </style>
 
@@ -94,12 +96,13 @@
                                     <div class="date">[${genre}]</div>
                                     <p class="date">${date}</p>
                                     <a href="/albumdata?sample_give=${albumtitle}"><button type="button" class="btn btn-primary">리뷰보기</button></a>
+
                                 </div>
                             </div>
                         </div>
                         `
                         temp_html2 += temp_html
-                        
+
                         if(i == 2){
                             let temp_html3 =`
                             <div class="carousel-item active">
@@ -111,7 +114,7 @@
                             </div>`
                             $('#dobox').append(temp_html3)
                             temp_html2 = ``;
-                        } 
+                        }
                         else if((i+1)%3 == 0 || i == album.length-1){
                             let temp_html3 =`
                             <div class="carousel-item">
@@ -127,7 +130,7 @@
                         }
                     }
                 }
-                       
+
             });
         }
     </script>
@@ -147,7 +150,7 @@
         <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
     </ol>
     <!-- 제일큰 박스-->
-    
+
     <div class="carousel-inner" id = "dobox">
         <!-- 한 페이지 박스-->
         <div class="carousel-item active">
@@ -302,3 +305,10 @@
 </script>
 
 </html>
+
+
+
+
+
+
+

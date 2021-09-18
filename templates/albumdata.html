@@ -10,6 +10,14 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
+
+<!--font css -->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap" rel="stylesheet">
+
+
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -26,7 +34,7 @@
     <script src="../static/js/common.js"></script>
 
 
-    <title>BTS!</title>
+    <title>Your BTS Playlist</title>
 </head>
 <script>
     $(document).on(function(){
@@ -125,7 +133,7 @@
                             <div class="jumbotron">
                                 <h2>${test[i]["morereview"]}</h2>
                                 <p>${test[i]["date"]}</p>
-                                <p><a class="btn btn-primary btn-lg dosometing" href="#" role="button">일단은 페이지 닫기로</a></p>
+
                             </div>
                         </th>
                     </tr>
@@ -194,25 +202,58 @@
 
 </script>
 <style>
-    #bodytest{
+    .row{
         margin: auto;
         padding: auto;
-        width: 85%;
+        width: 95%;
     }
+
+    .table{
+
+        width: 90% !important;
+        margin: auto;
+    }
+
     #reviewbody{
         cursor: pointer;
 
     }
+
     .hide{
         display:none;
     }
+
+    .testimg{
+        margin-left: 200px;
+        margin-bottom: 10px;
+        margin-top: 10px;
+
+    }
+
+    .btn-primary{
+        margin-left: 80px !important;
+    }
+
+    .btn-primary-white{
+        background-color: lightgray !important;
+        color: black !important;
+        border-color: lightgrey !important;
+
+    }
+
+
+    *{
+        font-family: 'Noto Sans KR', sans-serif;
+    }
+
+
 </style>
 
-<body id = "bodytest">
     <!-- 해더 시작부분 -->
     <header w3-include-html="header" class="head"></header>
-  
-    <div class="row">
+
+    <body id="bodytest">
+        <div class="row">
         <div class="col">
             <img class="testimg" id = "titleimg"
                 src="https://cdnimg.melon.co.kr/cm/album/images/102/73/641/10273641_500.jpg?931a1f4b6e6c90752585d656e86f0842/melon/resize/282/quality/80/optimize"
@@ -290,14 +331,14 @@
                     <div class="jumbotron">
                         <h4>제발되라제발</h4>
                         <p>2021.09.16</p>
-                        <p><a class="btn btn-primary btn-lg dosometing" href="#" role="button">일단은 페이지 닫기로</a></p>
+                        <p><a class="btn btn-primary btn-lg dosometing btn-primary-white" href="#" role="button">일단은 페이지 닫기로</a></p>
                     </div>
                 </th>
             </tr>
         </tbody>
     </table>
     
-    <a href="/albumlist"><button type="button" class="btn btn-primary">리스트 돌아가기</button></a>
+    <a href="/albumlist" role="button" class="btn btn-primary btn-primary-white">리스트 돌아가기</a>
     <button onclick="makeReview()" type="button" class="btn btn-primary">리뷰쓰기</button>
 </section>
     
@@ -313,7 +354,7 @@
         </div>
     </div>
     </p>
-    <p>평점 : <a id = "rate">사만오천점</a></p>
+
     <div>
         <div class="form-group">
         <label>리뷰</label>
