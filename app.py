@@ -73,20 +73,21 @@ def home():
             users = db.users
             id_check = users.find_one({"id": userid})
             hapw = hashlib.sha256(pw.encode('utf-8')).hexdigest()
-<<<<<<< HEAD
-            
-=======
 
->>>>>>> 9f9ac870d3d3deba62fffb892fcc8ba42788f8ca
-            if id_check is None:
-                flash("아이디가 존재하지 않습니다.")
-                return render_template('index.html')
-            elif id_check["password"] == hapw:
-                session["logged_in"] = userid
-                return render_template('albumlist.html', userid=userid)
-            else:
-                flash("비밀번호가 틀렸습니다.")
-                return render_template('index.html')
+<< << << < HEAD
+
+== == == =
+
+>> >> >> > beatrix
+if id_check is None:
+    flash("아이디가 존재하지 않습니다.")
+    return render_template('index.html')
+elif id_check["password"] == hapw:
+    session["logged_in"] = userid
+    return render_template('albumlist.html', userid=userid)
+else:
+    flash("비밀번호가 틀렸습니다.")
+    return render_template('index.html')
 
 
 # 로그아웃
