@@ -14,7 +14,7 @@ import json
 ##파이 몽고 DB
 from pymongo import MongoClient
 
-client = MongoClient('localhost', 27017)
+client = MongoClient('3.36.71.96', 27017, username="test", password="test")
 db = client.LYAlbum
 
 # 엘범 리스트 DB
