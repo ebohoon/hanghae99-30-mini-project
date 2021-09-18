@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -104,3 +105,55 @@
             </body>
 
 </html>
+=======
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
+
+<style>
+    * {
+        font-family: 'Jua', sans-serif;
+    }
+    .head {
+        margin-bottom: 70px;
+        font-size: 70px;
+        color: white;
+    }
+    .head-side {
+        float: right;
+        font-size: 20px;
+        padding: 10px;
+    }
+    .wrap {
+        height: 150px;
+        margin: auto;
+        padding: 20px;
+        border-style: none;
+        background-color: #9575cd
+    }
+    .btn-group-toggle {
+        font-size: 16px;
+    }
+
+</style>
+
+<div class="wrap">
+    <h1 class="head">MY BTS PLAYLIST
+    <div class="head-side">
+        <div class="btn-group-toggle" data-toggle="buttons">
+            {%if userid%}
+            Nickname {{userid}}님
+            <label class="btn btn-secondary active" onclick="location.href='/logout'">
+                Logout
+            </label>
+            {%else%}
+            너뭐야 당장나가
+            <label class="btn btn-secondary active" onclick="location.href='/logout'">
+                로그인페이지로!
+            </label>
+          {%endif%}
+        </div>
+    </div>
+    </h1>
+</div>
+>>>>>>> beatrix

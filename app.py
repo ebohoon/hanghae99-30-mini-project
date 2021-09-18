@@ -5,7 +5,6 @@ import datetime
 
 import requests
 
-
 app = Flask(__name__)
 
 # 테스트 improt
@@ -15,7 +14,7 @@ import json
 ##파이 몽고 DB
 from pymongo import MongoClient
 
-client = MongoClient('localhost', 27017)
+client = MongoClient('3.36.71.96', 27017, username="test", password="test")
 db = client.LYAlbum
 
 # 엘범 리스트 DB
@@ -37,7 +36,7 @@ app.secret_key = '이걸보다니.. 대단한걸?'
 @app.route('/header')
 def header():
     userid = session.get('logged_in')
-    return render_template('header.html',userid=userid)
+    return render_template('header.html', userid=userid)
 
 
 ##푸터
@@ -58,7 +57,7 @@ def home():
         if session.get('logged_in'):
             userid = session.get('logged_in')
             return render_template('albumlist.html', userid=userid)
-        
+
         return render_template('index.html')
     elif request.method == 'POST':
         userid = request.form.get("userid", type=str)
@@ -74,7 +73,11 @@ def home():
             users = db.users
             id_check = users.find_one({"id": userid})
             hapw = hashlib.sha256(pw.encode('utf-8')).hexdigest()
+<<<<<<< HEAD
             
+=======
+
+>>>>>>> beatrix
             if id_check is None:
                 flash("아이디가 존재하지 않습니다.")
                 return render_template('index.html')
@@ -84,13 +87,13 @@ def home():
             else:
                 flash("비밀번호가 틀렸습니다.")
                 return render_template('index.html')
-#로그아웃
+
+
+# 로그아웃
 @app.route("/logout", methods=["GET"])
 def logout():
-    session.pop('logged_in',None)
+    session.pop('logged_in', None)
     return render_template('index.html')
-
-
 
 
 # 회원가입 페이지
@@ -99,6 +102,7 @@ def logout():
 def sign_up_main():
     return render_template('register.html')
 
+
 @app.route('/check_dup_name', methods=['POST'])
 def check_dup_name():
     username_receive = request.form['username_give']
@@ -106,14 +110,18 @@ def check_dup_name():
     print(exists)
     return jsonify({'result': 'success', 'exists': exists})
 
+
 @app.route('/check_dup_id', methods=['POST'])
 def check_dup_id():
     id_receive = request.form['id_give']
     exists = bool(db.users.find_one({"id": id_receive}))
     return jsonify({'result': 'success', 'exists': exists})
+
+
 @app.route('/dododo')
 def what():
     return render_template('prac.html')
+
 
 @app.route('/sign_up/save', methods=['POST'])
 def sign_up():
@@ -131,9 +139,7 @@ def sign_up():
     return jsonify({'result': 'success'})
 
 
-
-
-#-----------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
 @app.route('/albumdata', methods=['GET'])
 def albumdata():
     sample_receive = request.args.get('sample_give')
@@ -144,7 +150,7 @@ def albumdata():
         print(sample_receive)
         data = sample_receive
         userid = session.get('logged_in')
-        return render_template('albumdata.html', msg="일단 연결은 되네", data=data ,userid =userid)
+        return render_template('albumdata.html', msg="일단 연결은 되네", data=data, userid=userid)
 
 
 @app.route('/albumdata/find', methods=['POST'])
@@ -178,9 +184,11 @@ def find_reviewone():
 def albumlist():
     return render_template('albumlist.html')
 
+
 @app.route('/albumreview')
 def albumreview():
     return render_template('albumreview.html')
+
 
 # 앨범리뷰쓰기 API
 @app.route('/write', methods=['POST'])
@@ -193,23 +201,23 @@ def reviewWrite():
     nowDate = now.strftime('%Y.%m.%d')
     titlename = request.form['title']
     doc = {
-        'nickname': name_receive,               # 유저
-        'review': oneReview_receive,          # 한줄평
-        'rete': rate_receive,                 # 평가
+        'nickname': name_receive,  # 유저
+        'review': oneReview_receive,  # 한줄평
+        'rete': rate_receive,  # 평가
         'date': nowDate,  # 리뷰 날짜
-        'morereview': detailReview_receive,   # 상세리뷰
-        'albumtitle': titlename                 #댓글에 해당하는 엘범
+        'morereview': detailReview_receive,  # 상세리뷰
+        'albumtitle': titlename  # 댓글에 해당하는 엘범
     }
-    
+
     db.review.insert_one(doc)
     return jsonify({'msg': '리뷰를 작성했습니다!'})
+
 
 # 앨범리스트 API
 @app.route('/listing', methods=['GET'])
 def listing():
     album = list(db.album.find({}, {'_id': False}))
     return jsonify({'album': album})
-
 
 
 # # 엘범 정보 크롤링 만들예정인 공간
@@ -244,6 +252,7 @@ def show_review():
     print(sample_receive)
     return jsonify({'msg': '리뷰를 보러 가볼까요?'})
 
+
 # 앨범리스트 리뷰 작성 API
 @app.route('/review', methods=['POST'])
 def make_review():
@@ -253,7 +262,7 @@ def make_review():
 # 엘범 정보 크롤링 만들예정인 공간
 @app.route('/temptestdo', methods=["GET", "POST"])
 def 크롤링():
-    testlist = [("test","testdo"),("test2","testdo2")]
+    testlist = [("test", "testdo"), ("test2", "testdo2")]
 
     doc = {
         'albumtitle': "Butter",  ## 앨범 타이틀
